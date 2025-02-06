@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../../common/Dropdown";
 
 type NavLinksTypes = {
@@ -7,6 +7,9 @@ type NavLinksTypes = {
   id: string;
 };
 const Header = () => {
+  const loc = useLocation();
+  const path: String = "/" + loc.pathname?.split("/")[1];
+
   const navLinks: NavLinksTypes[] = [
     {
       path: "/",
@@ -15,7 +18,7 @@ const Header = () => {
     },
 
     {
-      path: "/build-custom-pizza",
+      path: "/build-your-pizza",
       name: "Build your own pizza",
       id: "build",
     },
@@ -40,11 +43,13 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full fixed top-0 h-20 md:px-[5%] px-4 bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 text-black dark:text-white flex items-center justify-end gap-5">
+    <header className="w-full fixed top-0 h-20 md:px-[5%] px-4 bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 text-black dark:text-white flex items-center justify-end gap-5 z-50">
       {navLinks?.map((link) => (
         <Link
-          className="h-full w-auto px-2 text-lg font-medium leading-[5rem] hover:drop-shadow-[0_0_#fffbeb] 
- hover:border-black border-b-2 border-transparent dark:hover:border-amber-100"
+          className={`h-full w-auto px-2 text-lg font-medium leading-[5rem] hover:drop-shadow-[0_0_#fffbeb] 
+ hover:border-black border-b-2 dark:hover:border-amber-100 ${
+   path == link?.path ? "border-amber-300" : "border-transparent"
+ }`}
           to={link?.path}
           key={link?.id}
         >
