@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.scroll-hide::-webkit-scrollbar{
+  width: 0;
+  display: none;
+}
+
 .scroll-thin::-webkit-scrollbar{
   width: 4px;
 }
