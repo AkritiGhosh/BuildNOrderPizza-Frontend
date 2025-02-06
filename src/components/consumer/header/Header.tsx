@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Dropdown from "../../../layout/Dropdown";
+import Dropdown from "../../common/Dropdown";
 
 type NavLinksTypes = {
   path: string;

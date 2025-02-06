@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FloatingLabelInput from "../../../layout/FloatingLabelInput";
+import FloatingLabelInput from "../../common/FloatingLabelInput";
 
 const Register = () => {
   const [email, setEmail] = useState("");
