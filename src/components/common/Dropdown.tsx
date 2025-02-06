@@ -43,7 +43,7 @@ const Dropdown = ({
       </button>
       {showMenu && (
         <ul
-          className={`absolute top-[59px] right-0 min-h-10 py-2 list-none w-72 max-h-[200px] overflow-y-auto rounded-b-md bg-white dark:bg-black/70 scroll-hide z-[999]`}
+          className={`fixed md:absolute top-20 md:top-[59px] left-0 md:left-auto md:right-0 min-h-10 py-2 list-none w-screen md:w-72 max-h-[200px] overflow-y-auto rounded-b-md bg-white dark:bg-black/90 scroll-hide z-[999] border-t border-amber-700`}
         >
           {children}
         </ul>
