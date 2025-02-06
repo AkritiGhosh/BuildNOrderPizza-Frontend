@@ -15,7 +15,7 @@ const PageLayout = ({
   return (
     <div
       className={
-        "w-screen h-screen overflow-y-auto scroll-thin flex items-center justify-center p-4 bg-white dark:bg-slate-900 " +
+        "relative w-screen h-screen overflow-y-auto scroll-thin flex items-center justify-center bg-white dark:bg-slate-900 " +
         className
       }
     >
