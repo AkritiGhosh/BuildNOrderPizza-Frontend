@@ -13,20 +13,11 @@ const Header = () => {
       name: "Home",
       id: "home",
     },
-    {
-      path: "/menu",
-      name: "Menu",
-      id: "menu",
-    },
+
     {
       path: "/build-custom-pizza",
       name: "Build your own pizza",
       id: "build",
-    },
-    {
-      path: "/menu/offer",
-      name: "Offers and Vouchers",
-      id: "offer",
     },
   ];
 
@@ -78,7 +69,7 @@ const Header = () => {
           </svg>
         }
       >
-        {false ? (
+        {true ? (
           <li className="w-full py-2 px-4  text-sm text-amber-500 hover:bg-red-200/20 hover:font-bold cursor-pointer">
             Login
           </li>
@@ -91,12 +82,14 @@ const Header = () => {
               <span className="text-xl font-medium">User name</span>
             </li>
             {menuLinks?.map((menuItem) => (
-              <li
-                id={menuItem?.id}
-                className="w-full py-2 px-4  text-sm hover:bg-amber-200/20 hover:font-bold"
-              >
-                <Link to={menuItem?.path}>{menuItem?.name}</Link>
-              </li>
+              <Link to={menuItem?.path}>
+                <li
+                  id={menuItem?.id}
+                  className="w-full py-2 px-4 text-sm hover:bg-amber-200/30 hover:font-semibold"
+                >
+                  {menuItem?.name}
+                </li>
+              </Link>
             ))}
             <li className="w-full py-2 px-4  text-sm text-red-500 hover:bg-red-200/20 hover:font-bold cursor-pointer">
               Log out
