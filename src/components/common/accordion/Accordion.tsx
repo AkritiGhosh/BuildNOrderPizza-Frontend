@@ -40,7 +40,7 @@ const Accordion = ({
         </svg>
       </button>
       {open ? (
-        <div className="bg-black/50 p-2 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="bg-black/50 p-2 pb-3 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {children}
         </div>
       ) : null}
