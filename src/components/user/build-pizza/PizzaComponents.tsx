@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import OptionCard from "./OptionCard";
 // import Accordion from "../../common/accordion/Accordion";
 
 const Accordion = lazy(() => import("../../common/accordion/Accordion"));
@@ -26,7 +27,7 @@ const PizzaComponents = () => {
         {
           name: "Onion",
           price: 20,
-          isAvailable: true,
+          isAvailable: false,
         },
         {
           name: "Mushroom",
@@ -43,7 +44,7 @@ const PizzaComponents = () => {
         <>
           <Accordion title={component?.component}>
             {component?.data?.map((option) => (
-              <div>{option.name}</div>
+              <OptionCard {...option}/>
             ))}
           </Accordion>
           {x != components?.length - 1 && <hr className="border-amber-500" />}
