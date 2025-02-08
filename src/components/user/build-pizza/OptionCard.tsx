@@ -9,6 +9,14 @@ type CardPropType = {
 
 const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
   const [quantity, setQuantity] = useState(0);
+  console.log(quantity);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!/^\d+$/.test(e.target.value)) return;
+    if (+e.target.value > 10) return;
+    setQuantity(+e?.target?.value);
+  };
+
   return (
     <div
       className={`relative p-2 rounded border flex flex-col gap-2
@@ -39,26 +47,52 @@ const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
       {img && <img src={img} className="" />}
       <h1>{name}</h1>
       <p>{price}</p>
-      <div className="w-auto h-8 flex items-center">
+      <div className="w-auto h-6 flex items-center">
         {quantity > 0 ? (
           <>
             <button
               onClick={() => setQuantity((prev) => prev - 1)}
-              className="w-auto h-full py-1 px-2 text-sm rounded-l bg-amber-100 text-black font-bold font-mono hover:bg-amber-200"
+              className="w-auto h-full p-1 text-sm rounded-l bg-amber-100 text-black font-bold font-mono hover:bg-amber-200"
             >
-              -
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="black"
+                className="size-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14"
+                />
+              </svg>
             </button>
             <input
-              className="w-auto h-full max-w-10 text-sm bg-amber-100 text-black font-bold font-mono focus:bg-amber-200 text-center"
-              type="number"
+              className="w-auto h-full max-w-6 text-sm bg-amber-100 text-black font-bold font-mono focus:bg-amber-200 text-center"
               value={quantity}
-              onChange={(e) => setQuantity(+e?.target?.value)}
+              onChange={handleInput}
             />
             <button
+              disabled={quantity >= 10}
               onClick={() => setQuantity((prev) => prev + 1)}
-              className="w-auto h-full py-1 px-2 text-sm rounded-r bg-amber-100 text-black font-bold font-mono hover:bg-amber-200"
+              className="w-auto h-full p-1 text-sm rounded-r bg-amber-100 text-black font-bold font-mono hover:bg-amber-200 disabled:pointer-events-none disabled:opacity-60"
             >
-              +
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="black"
+                className="size-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
             </button>
           </>
         ) : (
