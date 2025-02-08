@@ -4,7 +4,8 @@ type CardPropType = {
   name: string;
   img?: string;
   price: number;
-  isAvailable: Boolean;
+  isAvailable: boolean;
+  updateCart: React.Dispatch<React.SetStateAction<object>>
 };
 
 const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
