@@ -12,7 +12,7 @@ type PizzaComponentProps = {
 };
 
 const PizzaComponents = ({ cart, updateCart }: PizzaComponentProps) => {
-  const [pizzaComponents, setPizzaComponents] = useState<[PizzaOptionByCategory]>([]);
+  const [pizzaComponents, setPizzaComponents] = useState<[PizzaOptionByCategory]>();
  
   useEffect(() => {
     fetchPizzaData();

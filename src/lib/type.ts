@@ -5,7 +5,7 @@ export type UserContextType = {
 };
 
 export type PizzaOption = {
-  isAvailable: string;
+  isAvailable: boolean;
   name: string;
   price: number;
 };
