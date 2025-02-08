@@ -1,13 +1,14 @@
 import { UserProfiles } from "./constants";
 
+console.log('import.meta.env.VITE_BACKEND', import.meta.env.VITE_BACKEND)
 const models = {
-  AUTH: import.meta.env.REACT_APP_BACKEND +"/auth/",
-  USER: import.meta.env.REACT_APP_BACKEND +"/user/",
-  OPTIONS: import.meta.env.REACT_APP_BACKEND +"/options/",
-  ORDER: import.meta.env.REACT_APP_BACKEND +"/order/",
+  AUTH: import.meta.env.VITE_BACKEND + "/auth/",
+  USER: import.meta.env.VITE_BACKEND + "/user/",
+  OPTIONS: import.meta.env.VITE_BACKEND + "/options/",
+  ORDER: import.meta.env.VITE_BACKEND + "/order/",
 };
 
-const API = {
+export const API = {
   OPTIONS: {
     // All options = /options/
     // By category = /options/:category
@@ -33,7 +34,7 @@ export const fetchAPI = async (
 ): Promise<any> => {
   try {
     const response = await fetch(api, {
-      method: method,
+      method: method.toUpperCase(),
       headers: { "Content-Type": "application/json" },
       body: body ? JSON.stringify(body) : null,
     });
