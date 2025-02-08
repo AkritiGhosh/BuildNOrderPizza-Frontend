@@ -1,53 +1,41 @@
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import OptionCard from "./OptionCard";
+import { API, fetchAPI } from "../../../lib/core";
+import {  PizzaOptionByCategory } from "../../../lib/type";
 // import Accordion from "../../common/accordion/Accordion";
 
 const Accordion = lazy(() => import("../../common/accordion/Accordion"));
 
-const PizzaComponents = () => {
-  const components = [
-    {
-      component: "Veg",
-      data: [
-        {
-          name: "Onion",
-          price: 20,
-          isAvailable: true,
-        },
-        {
-          name: "Mushroom",
-          price: 30,
-          isAvailable: true,
-        },
-      ],
-    },
-    {
-      component: "Veg",
-      data: [
-        {
-          name: "Onion",
-          price: 20,
-          isAvailable: false,
-        },
-        {
-          name: "Mushroom",
-          price: 30,
-          isAvailable: true,
-        },
-      ],
-    },
-  ];
+type PizzaComponentProps = {
+  cart: object;
+  updateCart: React.Dispatch<React.SetStateAction<object>>;
+};
+
+const PizzaComponents = ({ cart, updateCart }: PizzaComponentProps) => {
+  const [pizzaComponents, setPizzaComponents] = useState<[PizzaOptionByCategory]>([]);
+ 
+  useEffect(() => {
+    fetchPizzaData();
+  }, []);
+
+  const fetchPizzaData = async () => {
+    const response = await fetchAPI("GET", API.OPTIONS.GET_OPTIONS, false);
+    console.log(response);
+    if (response?.data) {
+      setPizzaComponents(response?.data);
+    }
+  };
   return (
     <>
       <h1>Choose your pizza selection</h1>
-      {components?.map((component, x) => (
+      {pizzaComponents?.map((component, x) => (
         <>
-          <Accordion title={component?.component}>
+          <Accordion title={component?.category}>
             {component?.data?.map((option) => (
-              <OptionCard {...option}/>
+              <OptionCard {...option} updateCart={updateCart} />
             ))}
           </Accordion>
-          {x != components?.length - 1 && <hr className="border-amber-500" />}
+          {x != pizzaComponents?.length - 1 && <hr className="border-amber-500" />}
         </>
       ))}
     </>
