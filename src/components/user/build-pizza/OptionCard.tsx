@@ -28,13 +28,13 @@ const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
         ${quantity > 0 ? "border-amber-300" : "border-white"}`}
     >
       {!isAvailable && (
-        <div className="absolute inset-0 w-full h-full z-10 bg-amber-50/60 cursor-not-allowed flex items-center justify-center">
+        <div className="absolute inset-0 w-full h-full z-10 bg-amber-50/60 cursor-not-allowed flex flex-col gap-2 items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={3}
-            className="size-10 stroke-amber-800"
+            className="size-10 stroke-amber-500 drop-shadow-[0_0_2px_black]"
           >
             <path
               strokeLinecap="round"
@@ -42,6 +42,7 @@ const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
               d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"
             />
           </svg>
+          <span className="text-base font-bold text-amber-400 drop-shadow-[0_0_2px_black]">Out of stock</span>
         </div>
       )}
       {img && <img src={img} className="" />}

@@ -12,7 +12,7 @@ const Accordion = ({
   const toggleAccordion = (e: React.MouseEvent<Element, MouseEvent>): void =>
     setOpen((prev) => !prev);
   return (
-    <div className="w-full relative my-2">
+    <div className="w-full my-2">
       <button
         onClick={toggleAccordion}
         className={`w-full h-12 px-2 py-1 flex items-center justify-between text-base ${
@@ -39,11 +39,14 @@ const Accordion = ({
           />
         </svg>
       </button>
-      {open ? (
-        <div className="bg-black/50 p-2 pb-3 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
-          {children}
-        </div>
-      ) : null}
+
+      <div
+        className={`${open ? "scale-y-100" : "scale-y-0 absolute"}
+        transition-transform duration-300 origin-top
+         bg-black/50 p-2 pb-3 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4`}
+      >
+        {children}
+      </div>
     </div>
   );
 };
