@@ -4,6 +4,7 @@ import { checkAuth } from "./lib/core";
 // import { UserContext } from "./lib/context";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
+import Loader from "./components/user/Loader";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState<boolean>(false);
@@ -20,7 +21,7 @@ function App() {
 
   return (
    
-      <Suspense fallback={<div className="w-screen h-screen fixed bg-black/40 z-[100] inset-0"></div>}>
+      <Suspense fallback={<Loader/>}>
         <RouterProvider router={checkAuth() ? privateRouter : publicRouter} />
       </Suspense>
   );
