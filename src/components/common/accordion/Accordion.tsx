@@ -7,18 +7,20 @@ const Accordion = ({
   children: ReactNode;
   title: String;
 }) => {
+  
   const [open, setOpen] = useState(false);
 
   const toggleAccordion = (e: React.MouseEvent<Element, MouseEvent>): void =>
     setOpen((prev) => !prev);
+
   return (
-    <div className="w-full my-2">
+    <div className="w-full">
       <button
         onClick={toggleAccordion}
         className={`w-full h-12 px-2 py-1 flex items-center justify-between text-base ${
           open
-            ? "text-amber-600 font-semibold bg-black/70 rounded-t-md"
-            : "text-amber-300 font-normal bg-black/30 rounded-md"
+            ? "text-amber-600 font-semibold bg-black/70"
+            : "text-amber-300 font-normal bg-black/30"
         } transition-colors duration-300`}
       >
         <span>{title}</span>
