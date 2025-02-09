@@ -8,9 +8,17 @@ export type PizzaOption = {
   isAvailable: boolean;
   name: string;
   price: number;
+  imgSrc: string;
+  _id: string;
+};
+
+type PizzaToppingType = {
+  category: string;
+  data: [PizzaOption];
 };
 
 export type PizzaOptionByCategory = {
-  category: string,
-  data: [PizzaOption]
-}
+  toppings: [PizzaToppingType];
+  crust: [PizzaOption];
+  size: [PizzaOption];
+};

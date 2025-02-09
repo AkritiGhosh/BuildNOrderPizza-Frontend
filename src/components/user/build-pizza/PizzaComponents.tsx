@@ -1,14 +1,12 @@
 import { lazy, useEffect, useState } from "react";
-import OptionCard from "./OptionCard";
 import { API, fetchAPI } from "../../../lib/core";
 import {  PizzaOptionByCategory } from "../../../lib/type";
-// import Accordion from "../../common/accordion/Accordion";
-
+const OptionCard = lazy(() => import("./OptionCard"));
 const Accordion = lazy(() => import("../../common/accordion/Accordion"));
 
 type PizzaComponentProps = {
   cart: object;
-  updateCart: React.Dispatch<React.SetStateAction<object>>;
+  updateCart: React.Dispatch<React.SetStateAction<[object]>>;
 };
 
 const PizzaComponents = ({ cart, updateCart }: PizzaComponentProps) => {
@@ -28,7 +26,7 @@ const PizzaComponents = ({ cart, updateCart }: PizzaComponentProps) => {
   return (
     <>
       <h1>Choose your pizza selection</h1>
-      {pizzaComponents?.map((component, x) => (
+      {pizzaComponents?.toppings?.map((component, x) => (
         <>
           <Accordion title={component?.category}>
             {component?.data?.map((option) => (
