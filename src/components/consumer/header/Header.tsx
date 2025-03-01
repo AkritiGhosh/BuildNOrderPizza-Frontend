@@ -8,7 +8,8 @@ type NavLinksTypes = {
 };
 const Header = () => {
   const loc = useLocation();
-  const path: String = "/" + loc.pathname?.split("/")[1];
+  const path: string = "/" + loc.pathname?.split("/")[1];
+  const isLoggedIn: boolean = true;
 
   const navLinks: NavLinksTypes[] = [
     {
@@ -43,16 +44,18 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full fixed top-0 h-20 lg:px-[5%] px-4 bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-70 text-black dark:text-white flex items-center justify-between gap-5 z-50">
-      <div className="h-20 w-full">
-        <h1 className="!leading-[80px] text-xl md:text-2xl drop-shadow-[0_0_8px_#fcd34d]">Build N Order Pizza</h1>
+    <header className="w-full fixed top-0 h-14 lg:h-20 lg:px-[5%] px-4 bg-white dark:bg-black text-black dark:text-white flex items-center justify-between gap-5 z-50 border-b border-amber-700">
+      <div className="h-14 lg:h-20 w-full">
+        <h1 className="!leading-[56px] lg:!leading-[80px] text-xl md:text-2xl drop-shadow-[0_0_8px_#fcd34d]">
+          Build N Order Pizza
+        </h1>
       </div>
-      <div className="w-auto md:w-full h-20 flex items-center justify-end gap-5 z-50">
+      <div className="w-auto md:w-full h-14 lg:h-20 flex items-center justify-end gap-5 z-50">
         {navLinks?.map((link) => (
           <Link
-            className={`hidden lg:block h-full w-auto px-2 text-lg font-medium leading-[5rem] hover:drop-shadow-[0_0_#fffbeb] 
+            className={`hidden lg:block h-full w-auto px-3 text-lg font-medium leading-[5rem] hover:drop-shadow-[0_0_#fcd34d] 
          hover:border-black border-b-2 dark:hover:border-amber-100 ${
-           path == link?.path ? "border-amber-300" : "border-transparent"
+           path == link?.path ? "border-amber-300 dark:bg-amber-100/10" : "border-transparent"
          }`}
             to={link?.path}
             key={link?.id}
@@ -61,6 +64,7 @@ const Header = () => {
           </Link>
         ))}
         <Dropdown
+          lstClass="bg-white dark:bg-black text-black dark:text-white !top-14 md:!top-12 lg:!top-[60px] border-y md:border md:border-t-0 rounded-b-none md:rounded-b-md"
           btnChild={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,8 +82,8 @@ const Header = () => {
             </svg>
           }
         >
-          {true ? (
-            <li className="w-full py-2 px-4  text-sm text-amber-500 hover:bg-red-200/20 hover:font-bold cursor-pointer">
+          {isLoggedIn ? (
+            <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
               Login
             </li>
           ) : (
@@ -94,7 +98,7 @@ const Header = () => {
                 <Link to={menuItem?.path}>
                   <li
                     id={menuItem?.id}
-                    className="w-full py-2 px-4 text-sm hover:bg-amber-200/30 hover:font-semibold"
+                    className="w-full py-2.5 px-4 text-sm hover:bg-amber-200/30 hover:font-semibold"
                   >
                     {menuItem?.name}
                   </li>
