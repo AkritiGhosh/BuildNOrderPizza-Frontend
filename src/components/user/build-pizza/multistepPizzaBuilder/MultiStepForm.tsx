@@ -1,8 +1,9 @@
 import React from 'react'
+import Stepper from './Stepper'
 
 const MultiStepForm = () => {
   return (
-    <div>MultiStepForm</div>
+    <div><Stepper /></div>
   )
 }
 

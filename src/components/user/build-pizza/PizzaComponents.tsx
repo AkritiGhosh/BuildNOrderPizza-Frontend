@@ -1,42 +1,26 @@
-import { lazy, useEffect, useState } from "react";
-import { API, fetchAPI } from "../../../lib/core";
-import {  PizzaOptionByCategory } from "../../../lib/type";
-const OptionCard = lazy(() => import("./OptionCard"));
-const Accordion = lazy(() => import("../../common/accordion/Accordion"));
+import {  useState } from "react";
+// import { API, fetchAPI } from "../../../lib/core";
+// import { PizzaOptionByCategory } from "../../../lib/type";
+// import Stepper from "./multistepPizzaBuilder/Stepper";
+import PizzaAccordion from "../../common/accordion/PizzaAccordion";
+import MultiStepForm from "./multistepPizzaBuilder/MultiStepForm";
+// const OptionCard = lazy(() => import("./OptionCard"));
+// const Accordion = lazy(
+//   () => import("../../common/accordion/ToppingsAccordion")
+// );
 
-type PizzaComponentProps = {
-  cart: object;
-  updateCart: React.Dispatch<React.SetStateAction<[object]>>;
-};
+const PizzaComponents = () => {
+  const [cart, setCart] = useState([1, 3]);
 
-const PizzaComponents = ({ cart, updateCart }: PizzaComponentProps) => {
-  const [pizzaComponents, setPizzaComponents] = useState<[PizzaOptionByCategory]>();
- 
-  useEffect(() => {
-    fetchPizzaData();
-  }, []);
-
-  const fetchPizzaData = async () => {
-    const response = await fetchAPI("GET", API.OPTIONS.GET_OPTIONS, false);
-    console.log(response);
-    if (response?.data) {
-      setPizzaComponents(response?.data);
-    }
-  };
   return (
-    <>
-      <h1>Choose your pizza selection</h1>
-      {pizzaComponents?.toppings?.map((component, x) => (
-        <>
-          <Accordion title={component?.category}>
-            {component?.data?.map((option) => (
-              <OptionCard {...option} updateCart={updateCart} />
-            ))}
-          </Accordion>
-          {x != pizzaComponents?.length - 1 && <hr className="border-amber-500" />}
-        </>
+    <div className="w-full h-full p-4 overflow-y-auto rounded dark:bg-black/80 bg-white/60 backdrop-blur-2xl shadow-[0_0_30px] shadow-amber-600/30 border-2 border-black/80">
+      <h1 className="mb-5 text-3xl text-center font-serif tracking-wider">Build your pizza</h1>
+      {cart?.map((_) => (
+        <PizzaAccordion>
+          <MultiStepForm />
+        </PizzaAccordion>
       ))}
-    </>
+    </div>
   );
 };
 
