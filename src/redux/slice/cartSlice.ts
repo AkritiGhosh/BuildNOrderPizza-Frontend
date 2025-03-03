@@ -4,20 +4,35 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: [],
   reducers: {
-    addNewData: (state) => {
+    selectPizzaSize: (state) => {},
+    selectCrustType: (state) => {},
+    selectSauce: (state) => {},
+    addNewToppings: (state) => {
       //   state.value += 1
     },
-    removeData: (state) => {
+    removeToppings: (state) => {
       //   state.value -= 1
     },
-    addQuantityOfExistingData: (state, action) => {
+    addQuantityOfExistingToppings: (state, action) => {
       //   state.value += action.payload
     },
+    addNewPizza: (state) => {},
+    removePizza: (state) => {},
+    duplicatePizza: (state) => {},
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addNewData, removeData, addQuantityOfExistingData } =
-  cartSlice.actions;
+export const {
+  selectPizzaSize,
+  selectCrustType,
+  selectSauce,
+  addNewToppings,
+  removeToppings,
+  addQuantityOfExistingToppings,
+  addNewPizza,
+  removePizza,
+  duplicatePizza,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
