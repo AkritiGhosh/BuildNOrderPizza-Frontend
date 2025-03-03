@@ -72,7 +72,7 @@ const PizzaAccordion = ({ children }: { children: ReactNode }) => {
       <div
         className={`${open ? "scale-y-100" : "scale-y-0 absolute"}
         transition-transform duration-300 origin-top
-         p-2 pb-3 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4`}
+         p-2 pb-3 rounded-b-md `}
       >
         {children}
       </div>
