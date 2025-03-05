@@ -2,19 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.scroll-hide::-webkit-scrollbar{
+.scroll-hide::-webkit-scrollbar {
   width: 0;
   display: none;
 }
 
-.scroll-thin::-webkit-scrollbar{
+.scroll-thin::-webkit-scrollbar {
   width: 4px;
 }
-.scroll-thin::-webkit-scrollbar-track{
-    background-color: lightgray;
-    opacity: 10;
+.scroll-thin::-webkit-scrollbar-track {
+  background-color: lightgray;
+  opacity: 10;
 }
 .scroll-thin::-webkit-scrollbar-thumb {
-    background-color: antiquewhite;
+  background-color: antiquewhite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .scroll-thin::-webkit-scrollbar-track {
+    background-color: black;
+    opacity: 10;
+  }
+  .scroll-thin::-webkit-scrollbar-thumb {
+    background-color: goldenrod;
+    border-radius: 6px;
+  }
 }
