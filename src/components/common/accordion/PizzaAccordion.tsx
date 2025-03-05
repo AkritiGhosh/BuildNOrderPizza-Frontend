@@ -1,20 +1,29 @@
 import React, { ReactNode, useState } from "react";
+import { useAppSelector } from "../../../hooks/reduxHooks";
 
-const PizzaAccordion = ({ children }: { children: ReactNode }) => {
+const PizzaAccordion = ({
+  pizzaId,
+  children,
+}: {
+  pizzaId: number;
+  children: ReactNode;
+}) => {
+  const cart = useAppSelector((state) => state.cart);
+  const pizza = cart.find((pizza) => pizza.id === pizzaId);
+  console.log(pizza, cart, pizzaId);
+
   const [open, setOpen] = useState(true);
 
   const toggleAccordion = (): void => setOpen((prev) => !prev);
-
+  if (!pizza) return null;
   return (
     <div className="w-full p-2 rounded-lg border border-amber-500 mb-4 last:mb-0">
       <div
         className={`w-full h-12 px-2 py-1 flex items-center justify-between text-base ${
-          open
-            ? "text-amber-600 font-semibold "
-            : "text-amber-300 font-normal"
+          open ? "text-amber-600 font-semibold " : "text-amber-300 font-normal"
         } transition-colors duration-300`}
       >
-        <span>Pizza N</span>
+        <span>{pizza.title}</span>
         <span className="inline-flex gap-4">
           <button className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center">
             <svg
