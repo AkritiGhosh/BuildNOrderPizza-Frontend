@@ -12,6 +12,21 @@ const initialState: PizzaCart[] = [
   },
 ];
 
+const addNewToppings = (pizza: PizzaCart, toppingId: string) => {
+  pizza.toppings.push({ id: toppingId, quantity: 1 });
+};
+const removeToppings = (pizza: PizzaCart, toppingId: string) => {
+  pizza.toppings = pizza.toppings.filter((topping) => topping.id != toppingId);
+};
+const changeQuantity = (
+  pizza: PizzaCart,
+  toppingId: string,
+  quantity: number
+) => {
+  const topping = pizza.toppings.find((topping) => topping.id === toppingId);
+  if (topping) topping.quantity = quantity;
+};
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -31,18 +46,20 @@ export const cartSlice = createSlice({
       const pizza = state.find((pizza) => pizza.id === id);
       if (pizza) pizza.sauce = sauce;
     },
-    addNewToppings: (state, action) => {
-      const { id, topping } = action.payload;
+
+    changeToppings: (state, action) => {
+      const { id, toppingId, quantity } = action.payload;
       const pizza = state.find((pizza) => pizza.id === id);
-      if (pizza) {
-        if (!pizza?.toppings.includes(topping)) pizza.toppings.push(topping);
+      if (!pizza) return;
+      if (!quantity) {
+        addNewToppings(pizza, toppingId);
+        return;
       }
-    },
-    removeToppings: (state, action) => {
-      //   state.value -= 1
-    },
-    changeToppingsQuantity: (state, action) => {
-      //   state.value += action.payload
+      const toppings = pizza?.toppings.map((topping) => topping.id);
+      if (toppings.includes(toppingId)) {
+        if (quantity == 0) removeToppings(pizza, toppingId);
+        else changeQuantity(pizza, toppingId, quantity);
+      }
     },
     addNewPizza: (state) => {
       const newData = {
@@ -77,9 +94,6 @@ export const {
   selectPizzaSize,
   selectCrustType,
   selectSauce,
-  addNewToppings,
-  removeToppings,
-  addQuantityOfExistingToppings,
   addNewPizza,
   removePizza,
   duplicatePizza,
