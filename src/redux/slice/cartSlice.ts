@@ -1,24 +1,74 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PizzaCart } from "../../lib/type";
+
+const initialState: PizzaCart[] = [
+  {
+    id: 1,
+    title: "Pizza 1",
+    crust: "",
+    size: "",
+    sauce: "",
+    toppings: [],
+  },
+];
 
 export const cartSlice = createSlice({
   name: "cart",
-  initialState: [],
+  initialState,
   reducers: {
-    selectPizzaSize: (state) => {},
-    selectCrustType: (state) => {},
-    selectSauce: (state) => {},
-    addNewToppings: (state) => {
-      //   state.value += 1
+    selectPizzaSize: (state, action) => {
+      const { id, size } = action.payload;
+      const pizza = state.find((pizza) => pizza.id === id);
+      if (pizza) pizza.size = size;
     },
-    removeToppings: (state) => {
+    selectCrustType: (state, action) => {
+      const { id, crust } = action.payload;
+      const pizza = state.find((pizza) => pizza.id === id);
+      if (pizza) pizza.crust = crust;
+    },
+    selectSauce: (state, action) => {
+      const { id, sauce } = action.payload;
+      const pizza = state.find((pizza) => pizza.id === id);
+      if (pizza) pizza.sauce = sauce;
+    },
+    addNewToppings: (state, action) => {
+      const { id, topping } = action.payload;
+      const pizza = state.find((pizza) => pizza.id === id);
+      if (pizza) {
+        if (!pizza?.toppings.includes(topping)) pizza.toppings.push(topping);
+      }
+    },
+    removeToppings: (state, action) => {
       //   state.value -= 1
     },
-    addQuantityOfExistingToppings: (state, action) => {
+    changeToppingsQuantity: (state, action) => {
       //   state.value += action.payload
     },
-    addNewPizza: (state) => {},
-    removePizza: (state) => {},
-    duplicatePizza: (state) => {},
+    addNewPizza: (state) => {
+      const newData = {
+        id: state.length + 1,
+        title: `Pizza ${state.length + 1}`,
+        crust: "",
+        size: "",
+        sauce: "",
+        toppings: [],
+      };
+      state.push(newData);
+    },
+    removePizza: (state, action) => {
+      const id = action.payload;
+      state = state.filter((pizza) => pizza.id != id);
+    },
+    duplicatePizza: (state, action) => {
+      const id = action.payload;
+      const pizza = state.find((pizza) => pizza.id === id);
+      const newData = {
+        ...pizza,
+        id: state.length + 1,
+        title: `Pizza ${state.length + 1}`,
+      };
+      state.push(newData);
+    },
   },
 });
 
