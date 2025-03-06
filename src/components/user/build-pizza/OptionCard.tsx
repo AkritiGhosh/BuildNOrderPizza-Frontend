@@ -1,20 +1,28 @@
 import React, { useState } from "react";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
 
 type CardPropType = {
+  _id: string;
   name: string;
   img?: string;
   price: number;
   isAvailable: boolean;
-  updateCart: React.Dispatch<React.SetStateAction<object>>
+  updateCart: React.Dispatch<React.SetStateAction<object>>;
 };
 
-const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
+const OptionCard = ({
+  _id,
+  name,
+  img = "",
+  price,
+  isAvailable,
+}: CardPropType) => {
+  const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(0);
-  console.log(quantity);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!/^\d+$/.test(e.target.value)) return;
-    if (+e.target.value > 10) return;
+    if (+e.target.value < 0 || +e.target.value > 10) return;
     setQuantity(+e?.target?.value);
   };
 
@@ -43,7 +51,9 @@ const OptionCard = ({ name, img = "", price, isAvailable }: CardPropType) => {
               d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"
             />
           </svg>
-          <span className="text-base font-bold text-amber-400 drop-shadow-[0_0_2px_black]">Out of stock</span>
+          <span className="text-base font-bold text-amber-400 drop-shadow-[0_0_2px_black]">
+            Out of stock
+          </span>
         </div>
       )}
       {img && <img src={img} className="" />}

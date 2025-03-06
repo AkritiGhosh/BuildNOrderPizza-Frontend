@@ -1,5 +1,7 @@
 import React, { ReactNode, useState } from "react";
-import { useAppSelector } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { duplicatePizza, removePizza } from "../../../redux/slice/cartSlice";
+import { PizzaCart } from "../../../lib/type";
 
 const PizzaAccordion = ({
   pizzaId,
@@ -8,14 +10,17 @@ const PizzaAccordion = ({
   pizzaId: number;
   children: ReactNode;
 }) => {
+  const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
   const pizza = cart.find((pizza) => pizza.id === pizzaId);
-  console.log(pizza, cart, pizzaId);
-
+  
   const [open, setOpen] = useState(true);
-
-  const toggleAccordion = (): void => setOpen((prev) => !prev);
+  
   if (!pizza) return null;
+  const toggleAccordion = (): void => setOpen((prev) => !prev);
+  const deletePizza = () => dispatch(removePizza(pizza.id));
+  const copyPizzaData = ()  => dispatch(duplicatePizza(pizza));
+
   return (
     <div className="w-full p-2 rounded-lg border border-amber-500 mb-4 last:mb-0">
       <div
@@ -25,7 +30,7 @@ const PizzaAccordion = ({
       >
         <span>{pizza.title}</span>
         <span className="inline-flex gap-4">
-          <button className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center">
+          <button onClick={copyPizzaData} className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -40,7 +45,11 @@ const PizzaAccordion = ({
               />
             </svg>
           </button>
-          <button className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center">
+          <button
+            onClick={deletePizza}
+            disabled={cart?.length <= 1}
+            className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center disabled:pointer-events-none disabled:opacity-30 disabled:cursor-not-allowed"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
