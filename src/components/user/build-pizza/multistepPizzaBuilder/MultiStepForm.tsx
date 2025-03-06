@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from "react";
+import  { Fragment, useEffect, useMemo, useState } from "react";
 import Stepper from "./Stepper";
-import { PizzaOptionByCategory } from "../../../../lib/type";
 import { API, fetchAPI } from "../../../../lib/core";
 import ToppingsAccordion from "../../../common/accordion/ToppingsAccordion";
 import OptionCard from "../OptionCard";
 
+const steps = [
+  "Select Size",
+  "Select Crust",
+  "Select Toppings",
+  "Select Cheese",
+  "Select Sauce",
+];
 const MultiStepForm = () => {
-  const [pizzaComponents, setPizzaComponents]:Array<object> = useState([]);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [allComponents, setAllComponents]: object[] = useState([]);
+  console.log(allComponents, currentStep);
 
   useEffect(() => {
     fetchPizzaData();
@@ -14,58 +22,60 @@ const MultiStepForm = () => {
 
   const fetchPizzaData = async () => {
     const response = await fetchAPI("GET", API.OPTIONS.GET_OPTIONS, false);
-    console.log(response);
-    // if (response?.data) {
-     
-    // }
-    setPizzaComponents([
-      {
-        component: "Veg",
-        data: [
-          {
-            name: "Onion",
-            price: 20,
-            isAvailable: true,
-          },
-          {
-            name: "Mushroom",
-            price: 30,
-            isAvailable: true,
-          },
-        ],
-      },
-      {
-        component: "Veg",
-        data: [
-          {
-            name: "Onion",
-            price: 20,
-            isAvailable: false,
-          },
-          {
-            name: "Mushroom",
-            price: 30,
-            isAvailable: true,
-          },
-        ],
-      },
-    ]);
+    setAllComponents(response?.data);
   };
+
+  const handleStepNavigation = (stepNo: number): void => {
+    setCurrentStep(stepNo);
+  };
+
+  const currentComponents = useMemo(() => {
+    switch (currentStep) {
+      case 1:
+        return allComponents?.crust;
+      case 2:
+        return allComponents.toppings;
+      case 3:
+        return allComponents.sauce;
+      case 4:
+        return allComponents.cheese;
+      default:
+        return allComponents.size;
+    }
+  }, [currentStep, allComponents]);
+
   return (
     <div>
-      <Stepper />
-      {pizzaComponents?.map((component, x) => (
-        <>
-          <ToppingsAccordion title={component?.component}>
-            {component?.data?.map((option) => (
-              <OptionCard {...option} />
-            ))}
-          </ToppingsAccordion>
-          {x != pizzaComponents?.length - 1 && (
-            <hr className="border-amber-500" />
-          )}
-        </>
-      ))}
+      <Stepper
+        steps={steps}
+        currentStep={currentStep}
+        handleStepNavigation={handleStepNavigation}
+      />
+      {currentStep != 2
+        ? currentComponents?.map((component, x: number) => (
+            <OptionCard key={currentStep + x} {...component} />
+          ))
+        : currentComponents?.map((component, x: number) => (
+            <Fragment key={currentStep + x}>
+              <ToppingsAccordion title={component?.category}>
+                {component?.data?.map((option) => (
+                  <OptionCard {...option} />
+                ))}
+              </ToppingsAccordion>
+              {x != allComponents?.length - 1 && (
+                <hr className="border-amber-500" />
+              )}
+            </Fragment>
+          ))}
+      <div className="w-full flex justify-between items-center">
+        <button
+          disabled={currentStep == 0}
+          onClick={() => setCurrentStep((prev) => prev - 1)}
+        >
+          Back
+        </button>
+        <button onClick={() => setCurrentStep((prev) => prev + 1)}>Next</button>
+      </div>
     </div>
   );
 };

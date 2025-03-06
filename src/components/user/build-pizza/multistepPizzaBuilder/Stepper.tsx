@@ -1,21 +1,30 @@
 import React from "react";
 
-const Stepper = () => {
-  const step = 0;
-  const steps = ["", "", "", ""];
+type StepperPropsType = {
+  handleStepNavigation: (i: number) => void;
+  steps: string[];
+  currentStep: number;
+};
+
+const Stepper = ({
+  handleStepNavigation,
+  steps,
+  currentStep = 0,
+}: StepperPropsType) => {
   return (
     <div className="w-full h-2 flex justify-between gap-2 items-center">
       {steps?.map((_, i) => (
         <>
-          <span
+          <button
+            onClick={() => handleStepNavigation(i)}
             className={`w-2.5 min-w-2.5 h-2.5 inline-block rounded-full ${
-              i <= step ? "bg-amber-500" : "bg-amber-200"
+              i <= currentStep ? "bg-amber-500" : "bg-amber-200"
             }`}
           />
-          {i != steps?.length -1 ? (
-            <span
+          {i != steps?.length - 1 ? (
+            <button
               className={`w-full h-0.5 inline-block rounded ${
-                i < step ? "bg-amber-500" : "bg-amber-200"
+                i < currentStep ? "bg-amber-500" : "bg-amber-200"
               }`}
             />
           ) : null}
