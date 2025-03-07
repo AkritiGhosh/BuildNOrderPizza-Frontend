@@ -1,8 +1,8 @@
-import  { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import Stepper from "./Stepper";
 import { API, fetchAPI } from "../../../../lib/core";
 import ToppingsAccordion from "../../../common/accordion/ToppingsAccordion";
-import OptionCard from "../OptionCard";
+import OptionCard from "./OptionCard";
 
 const steps = [
   "Select Size",
@@ -34,13 +34,13 @@ const MultiStepForm = () => {
       case 1:
         return allComponents?.crust;
       case 2:
-        return allComponents.toppings;
+        return allComponents?.toppings;
       case 3:
-        return allComponents.sauce;
+        return allComponents?.sauce;
       case 4:
-        return allComponents.cheese;
+        return allComponents?.cheese;
       default:
-        return allComponents.size;
+        return allComponents?.size;
     }
   }, [currentStep, allComponents]);
 
