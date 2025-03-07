@@ -15,7 +15,7 @@ const PizzaComponents = () => {
       </h1>
       {cart?.map((cartData) => (
         <PizzaAccordion pizzaId={cartData.id} key={cartData.id}>
-          <MultiStepForm />
+          <MultiStepForm pizzaId={cartData.id} />
         </PizzaAccordion>
       ))}
       <button onClick={handleAdd} className="w-auto h-10 px-3 flex items-center justify-center text-base bg-amber-500 border-black/80 text-black rounded-md font-semibold hover:bg-amber-600">
