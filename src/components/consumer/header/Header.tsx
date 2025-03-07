@@ -44,18 +44,18 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full fixed top-0 h-14 lg:h-20 lg:px-[5%] px-4 bg-white dark:bg-black text-black dark:text-white flex items-center justify-between gap-5 z-50 border-b border-amber-700">
+    <header className="w-full fixed top-0 h-14 lg:h-20 lg:px-[5%] px-4 bg-white/85 dark:bg-black/85 text-amber-950 dark:text-white flex items-center justify-between gap-5 z-50 border-b border-amber-700">
       <div className="h-14 lg:h-20 w-full">
-        <h1 className="!leading-[56px] lg:!leading-[80px] text-xl md:text-2xl drop-shadow-[0_0_8px_#fcd34d]">
+        <h1 className="!leading-[56px] lg:!leading-[80px] md:text-4xl text-2xl drop-shadow-[0_0_8px_#fcd34d] font-cursive">
           Build N Order Pizza
         </h1>
       </div>
       <div className="w-auto md:w-full h-14 lg:h-20 flex items-center justify-end gap-5 z-50">
         {navLinks?.map((link) => (
           <Link
-            className={`hidden lg:block h-full w-auto px-3 text-lg font-medium leading-[5rem] hover:drop-shadow-[0_0_#fcd34d] 
+            className={`hidden lg:block h-full w-auto px-3 text-lg font-medium leading-[5rem] dark:hover:drop-shadow-[0_0_#fcd34d] hover:drop-shadow-[0_0_#451a03] 
          hover:border-black border-b-2 dark:hover:border-amber-100 ${
-           path == link?.path ? "border-amber-300 dark:bg-amber-100/10" : "border-transparent"
+           path == link?.path ? "border-amber-700 dark:border-amber-300 dark:bg-amber-100/10" : "border-transparent"
          }`}
             to={link?.path}
             key={link?.id}
@@ -72,7 +72,7 @@ const Header = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 hover:stroke-2 hover:stroke-amber-50 mt-2"
+              className="size-6 hover:stroke-2 dark:hover:stroke-amber-50 mt-2"
             >
               <path
                 strokeLinecap="round"

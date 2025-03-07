@@ -12,7 +12,7 @@ const steps = [
   "Select Cheese",
   "Select Sauce",
 ];
-const MultiStepForm = ({pizzaId}: {pizzaId: string}) => {
+const MultiStepForm = ({ pizzaId }: { pizzaId: string }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [allComponents, setAllComponents]: object[] = useState([]);
   console.log(allComponents, currentStep);
@@ -68,14 +68,21 @@ const MultiStepForm = ({pizzaId}: {pizzaId: string}) => {
               )}
             </Fragment>
           ))}
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex justify-between items-center mt-4">
         <button
           disabled={currentStep == 0}
           onClick={() => setCurrentStep((prev) => prev - 1)}
+          className="disabled:opacity-0 h-8 px-4 text-base text-black dark:text-white bg-transparent border border-amber-800 dark:border-amber-300 flex items-center justify-center rounded-md hover:bg-amber-800/40 dark:hover:bg-amber-200/20"
         >
           Back
         </button>
-        <button onClick={() => setCurrentStep((prev) => prev + 1)}>Next</button>
+        <button
+          onClick={() => setCurrentStep((prev) => prev + 1)}
+          disabled={currentStep == steps.length - 1}
+          className="disabled:opacity-0 h-8 px-4 text-base text-black dark:text-white bg-transparent border border-amber-800 dark:border-amber-300 self-end flex items-center justify-center rounded-md hover:bg-amber-800/40 dark:hover:bg-amber-200/20"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

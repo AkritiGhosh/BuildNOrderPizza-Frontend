@@ -13,30 +13,35 @@ const PizzaAccordion = ({
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
   const pizza = cart.find((pizza) => pizza.id === pizzaId);
-  
+
   const [open, setOpen] = useState(true);
-  
+
   if (!pizza) return null;
   const toggleAccordion = (): void => setOpen((prev) => !prev);
   const deletePizza = () => dispatch(removePizza(pizza.id));
-  const copyPizzaData = ()  => dispatch(duplicatePizza(pizza));
+  const copyPizzaData = () => dispatch(duplicatePizza(pizza));
 
   return (
     <div className="w-full p-2 rounded-lg border border-amber-500 mb-4 last:mb-0">
       <div
         className={`w-full h-12 px-2 py-1 flex items-center justify-between text-base ${
-          open ? "text-amber-600 font-semibold " : "text-amber-300 font-normal"
+          open
+            ? "text-black dark:text-amber-600 font-semibold "
+            : "text-amber-900 dark:text-amber-300 font-normal"
         } transition-colors duration-300`}
       >
         <span>{pizza.title}</span>
         <span className="inline-flex gap-4">
-          <button onClick={copyPizzaData} className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center">
+          <button
+            onClick={copyPizzaData}
+            className="p-2 hover:bg-amber-800/20 dark:hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              className="size-6 stroke-amber-300"
+              className="size-6 stroke-amber-900 dark:stroke-amber-300"
             >
               <path
                 strokeLinecap="round"
@@ -48,7 +53,7 @@ const PizzaAccordion = ({
           <button
             onClick={deletePizza}
             disabled={cart?.length <= 1}
-            className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center disabled:pointer-events-none disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 hover:bg-amber-800/20 dark:hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center disabled:hidden"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +61,7 @@ const PizzaAccordion = ({
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="red"
-              className="size-6"
+              className="size-5"
             >
               <path
                 strokeLinecap="round"
@@ -65,13 +70,15 @@ const PizzaAccordion = ({
               />
             </svg>
           </button>
-          <button className="p-2 hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center">
+          <button
+            onClick={toggleAccordion}
+            className="p-2 hover:bg-amber-800/20 dark:hover:bg-amber-200/20 rounded-md size-10 flex items-center justify-center"
+          >
             <svg
-              onClick={toggleAccordion}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth={open ? 3 : 2}
+              strokeWidth={open ? 2.5 : 2}
               stroke="currentColor"
               className={`size-4 ${
                 open ? "-scale-y-100" : "scale-y-100"
