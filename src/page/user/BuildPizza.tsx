@@ -4,10 +4,16 @@ import PizzaComponents from "../../components/user/build-pizza/PizzaComponents";
 // import { useState } from "react";
 
 const BuildPizza = () => {
+  const darkMode = document.body.classList.contains("dark");
+  console.log(darkMode);
+  const bgUrl = darkMode
+    ? 'bg-[url("/bg/dark.jpg")]'
+    : 'bg-[url("/bg/light.jpg")]';
   return (
     <PageLayout>
       <main
-        className={`relative w-screen h-auto min-h-screen lg:h-screen inset-0 bg-cover bg-right bg-fixed overflow-auto bg-[url("/background.jpg")] px-4 xl:px-[5%] pt-20 lg:pt-28 pb-8 flex flex-col justify-between gap-5 text-white`}
+        style={{ backgroundSize: "25%" }}
+        className={`relative w-screen h-auto min-h-screen lg:h-screen inset-0 bg-repeat overflow-auto ${bgUrl} px-4 xl:px-[5%] pt-20 lg:pt-28 pb-8 flex flex-col justify-between gap-5 text-white`}
       >
         <PizzaComponents />
         <div className="w-full pr-8 md:pr-0 h-10 md:h-14 md:right-4 xl:right-[5%] bottom-4 md:bottom-8 fixed md:absolute flex justify-center md:justify-end">
