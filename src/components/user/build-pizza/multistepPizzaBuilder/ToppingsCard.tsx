@@ -34,13 +34,17 @@ const ToppingsCard = ({
 
   return (
     <div
-      className={`relative p-2 rounded border flex flex-col gap-2
+      className={`relative py-2 px-4 rounded border-2 flex flex-col gap-2 text-black dark:text-white hover:shadow-xl shadow-amber-950 dark:shadow-amber-200 cursor-pointer text-left
         ${
           !isAvailable
             ? "cursor-not-allowed pointer-events-none opacity-50"
             : null
         }
-        ${quantity > 0 ? "border-amber-300" : "border-white"}`}
+        ${
+          quantity > 0
+            ? "border-amber-300 bg-white/40 dark:bg-black/40"
+            : "border-black dark:border-white"
+        }`}
     >
       {!isAvailable && (
         <div className="absolute inset-0 w-full h-full z-10 bg-amber-50/60 cursor-not-allowed flex flex-col gap-2 items-center justify-center">
@@ -70,14 +74,14 @@ const ToppingsCard = ({
           <>
             <button
               onClick={() => setQuantity((prev) => prev - 1)}
-              className="w-auto h-full p-1 text-sm rounded-l bg-amber-100 text-black font-bold font-mono hover:bg-amber-200"
+              className="w-auto h-full p-1 text-sm rounded-l bg-amber-700 dark:bg-amber-100 text-white dark:text-black font-bold font-mono hover:bg-amber-800 dark:hover:bg-amber-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
-                stroke="black"
+                stroke="currentColor"
                 className="size-4"
               >
                 <path
@@ -88,21 +92,22 @@ const ToppingsCard = ({
               </svg>
             </button>
             <input
-              className="w-auto h-full max-w-6 text-sm bg-amber-100 text-black font-bold font-mono focus:bg-amber-200 text-center"
+              className="w-auto h-full max-w-6 text-sm bg-amber-700 dark:bg-amber-100 text-white dark:text-black font-bold font-mono focus:bg-amber-800 dark:focus:bg-amber-200 text-center focus:outline-none"
               value={quantity}
+              type="number"
               onChange={handleInput}
             />
             <button
               disabled={quantity >= 10}
               onClick={() => setQuantity((prev) => prev + 1)}
-              className="w-auto h-full p-1 text-sm rounded-r bg-amber-100 text-black font-bold font-mono hover:bg-amber-200 disabled:pointer-events-none disabled:opacity-60"
+              className="w-auto h-full p-1 text-sm rounded-r bg-amber-700 dark:bg-amber-100 text-white dark:text-black font-bold font-mono hover:bg-amber-800 dark:hover:bg-amber-200 disabled:pointer-events-none disabled:opacity-60"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
-                stroke="black"
+                stroke="currentColor"
                 className="size-4"
               >
                 <path
@@ -116,7 +121,7 @@ const ToppingsCard = ({
         ) : (
           <button
             onClick={() => setQuantity((prev) => prev + 1)}
-            className="w-auto h-full py-1 px-2 text-sm rounded bg-amber-100 text-black font-bold font-mono hover:bg-amber-200"
+            className="w-auto h-full flex items-center justify-center px-3 text-sm rounded bg-amber-700 dark:bg-amber-100 text-white dark:text-black font-bold font-mono hover:bg-amber-800 dark:hover:bg-amber-200"
           >
             + Add
           </button>

@@ -21,18 +21,19 @@ const OptionCard = ({
 }: CardPropType) => {
   // const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
-  const [selected, setSelected] = useState(
-    cart.find((item) => item?.category === _id)
-  );
+  const [selected, setSelected] = useState(false);
   return (
-    <div
-      className={`relative p-2 rounded border flex flex-col gap-2
+    <button
+      onClick={() => setSelected(!selected)}
+      className={`relative py-2 px-4 rounded border-2 flex flex-col gap-2 text-black dark:text-white hover:shadow-xl shadow-amber-950 dark:shadow-amber-200 cursor-pointer text-left
         ${
           !isAvailable
             ? "cursor-not-allowed pointer-events-none opacity-50"
             : null
         }
-        ${selected > 0 ? "border-amber-300" : "border-white"}`}
+        ${
+          selected ? "border-amber-300 bg-white/40 dark:bg-black/40" : "border-black dark:border-white"
+        }`}
     >
       {!isAvailable && (
         <div className="absolute inset-0 w-full h-full z-10 bg-amber-50/60 cursor-not-allowed flex flex-col gap-2 items-center justify-center">
@@ -56,8 +57,8 @@ const OptionCard = ({
       )}
       {img && <img src={img} className="" />}
       <h1>{name}</h1>
-      <p>{price}</p>
-    </div>
+      <p>₹{price}</p>
+    </button>
   );
 };
 

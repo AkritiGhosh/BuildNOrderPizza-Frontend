@@ -52,22 +52,28 @@ const MultiStepForm = ({ pizzaId }: { pizzaId: string }) => {
         currentStep={currentStep}
         handleStepNavigation={handleStepNavigation}
       />
-      {currentStep != 2
-        ? currentComponents?.map((component, x: number) => (
+      {currentStep != 2 ? (
+        <div
+          className={`p-2 pb-3 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4`}
+        >
+          {currentComponents?.map((component, x: number) => (
             <OptionCard key={currentStep + x} {...component} />
-          ))
-        : currentComponents?.map((component, x: number) => (
-            <Fragment key={currentStep + x}>
-              <ToppingsAccordion title={component?.category}>
-                {component?.data?.map((option) => (
-                  <ToppingsCard {...option} pizzaId={pizzaId} />
-                ))}
-              </ToppingsAccordion>
-              {x != allComponents?.length - 1 && (
-                <hr className="border-amber-500" />
-              )}
-            </Fragment>
           ))}
+        </div>
+      ) : (
+        currentComponents?.map((component, x: number) => (
+          <Fragment key={currentStep + x}>
+            <ToppingsAccordion title={component?.category}>
+              {component?.data?.map((option) => (
+                <ToppingsCard {...option} pizzaId={pizzaId} />
+              ))}
+            </ToppingsAccordion>
+            {x != allComponents?.length - 1 && (
+              <hr className="border-amber-500" />
+            )}
+          </Fragment>
+        ))
+      )}
       <div className="w-full flex justify-between items-center mt-4">
         <button
           disabled={currentStep == 0}
