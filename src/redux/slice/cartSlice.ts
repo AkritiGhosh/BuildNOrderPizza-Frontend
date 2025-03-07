@@ -94,6 +94,7 @@ export const {
   selectPizzaSize,
   selectCrustType,
   selectSauce,
+  changeToppings,
   addNewPizza,
   removePizza,
   duplicatePizza,

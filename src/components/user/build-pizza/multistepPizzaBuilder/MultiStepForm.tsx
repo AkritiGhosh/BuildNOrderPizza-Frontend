@@ -3,6 +3,7 @@ import Stepper from "./Stepper";
 import { API, fetchAPI } from "../../../../lib/core";
 import ToppingsAccordion from "../../../common/accordion/ToppingsAccordion";
 import OptionCard from "./OptionCard";
+import ToppingsCard from "./ToppingsCard";
 
 const steps = [
   "Select Size",
@@ -11,7 +12,7 @@ const steps = [
   "Select Cheese",
   "Select Sauce",
 ];
-const MultiStepForm = () => {
+const MultiStepForm = ({pizzaId}: {pizzaId: string}) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [allComponents, setAllComponents]: object[] = useState([]);
   console.log(allComponents, currentStep);
@@ -59,7 +60,7 @@ const MultiStepForm = () => {
             <Fragment key={currentStep + x}>
               <ToppingsAccordion title={component?.category}>
                 {component?.data?.map((option) => (
-                  <OptionCard {...option} />
+                  <ToppingsCard {...option} pizzaId={pizzaId} />
                 ))}
               </ToppingsAccordion>
               {x != allComponents?.length - 1 && (
