@@ -20,6 +20,7 @@ type PizzaToppingType = {
 export type PizzaOptionByCategory = {
   toppings: [PizzaToppingType];
   crust: [PizzaOption];
+  sauce: [PizzaOption];
   size: [PizzaOption];
 };
 
@@ -35,4 +36,7 @@ export type PizzaCart = {
   size: string;
   sauce: string;
   toppings: Array<PizzaCartTopping>;
+  cheese: string[];
 }
+
+export type FormStepsType = "size" | "crust" | "toppings" | "cheese" | "sauce";

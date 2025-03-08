@@ -4,18 +4,12 @@ import { API, fetchAPI } from "../../../../lib/core";
 import ToppingsAccordion from "../../../common/accordion/ToppingsAccordion";
 import OptionCard from "./OptionCard";
 import ToppingsCard from "./ToppingsCard";
+import { FormStepsType, PizzaOptionByCategory } from "../../../../lib/type";
 
-const steps = [
-  "Select Size",
-  "Select Crust",
-  "Select Toppings",
-  "Select Cheese",
-  "Select Sauce",
-];
-const MultiStepForm = ({ pizzaId }: { pizzaId: string }) => {
+const steps : FormStepsType[] = ["size", "crust", "toppings", "cheese", "sauce"];
+const MultiStepForm = ({ pizzaId }: { pizzaId: number }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [allComponents, setAllComponents]: object[] = useState([]);
-  console.log(allComponents, currentStep);
+  const [allComponents, setAllComponents] = useState<PizzaOptionByCategory[]>([]);
 
   useEffect(() => {
     fetchPizzaData();
@@ -30,7 +24,7 @@ const MultiStepForm = ({ pizzaId }: { pizzaId: string }) => {
     setCurrentStep(stepNo);
   };
 
-  const currentComponents = useMemo(() => {
+  const currentComponents = useMemo<PizzaOptionByCategory[]>(() => {
     switch (currentStep) {
       case 1:
         return allComponents?.crust;
@@ -57,7 +51,12 @@ const MultiStepForm = ({ pizzaId }: { pizzaId: string }) => {
           className={`p-2 pb-3 rounded-b-md grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4`}
         >
           {currentComponents?.map((component, x: number) => (
-            <OptionCard key={currentStep + x} {...component} />
+            <OptionCard
+              key={currentStep + x}
+              {...component}
+              category={steps[currentStep]}
+              pizzaId={pizzaId}
+            />
           ))}
         </div>
       ) : (

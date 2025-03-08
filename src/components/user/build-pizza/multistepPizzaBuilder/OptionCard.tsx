@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
-// import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
+import {
+  selectCrustType,
+  selectPizzaSize,
+  selectSauce,
+} from "../../../../redux/slice/cartSlice";
 
 type CardPropType = {
+  pizzaId: number;
   _id: string;
   name: string;
   img?: string;
   price: number;
   isAvailable: boolean;
-  updateCart: React.Dispatch<React.SetStateAction<object>>;
+  category: "size" | "crust" | "toppings" | "cheese" | "sauce";
 };
 
 const OptionCard = ({
+  pizzaId,
   _id = "",
   name,
   img = "",
@@ -19,12 +24,37 @@ const OptionCard = ({
   isAvailable,
   category,
 }: CardPropType) => {
-  // const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart);
-  const [selected, setSelected] = useState(false);
+  const dispatch = useAppDispatch();
+  const pizza = useAppSelector((state) =>
+    state.cart?.find((p) => p.id === pizzaId)
+  );
+  if (!pizza) return null;
+  const selected = pizza[category] === _id;
+
+  const handleClick = () => {
+    console.log("clicked", category, _id);
+    switch (category) {
+      case "size": {
+        console.log("selected", category, _id);
+        dispatch(selectPizzaSize({ id: pizzaId, size: _id }));
+        console.log("done", pizza);
+        return;
+      }
+      case "crust": {
+        dispatch(selectCrustType({ id: pizzaId, crust: _id }));
+        return;
+      }
+      case "sauce": {
+        dispatch(selectSauce({ id: pizzaId, sauce: _id }));
+        return;
+      }
+      default:
+        return;
+    }
+  };
   return (
     <button
-      onClick={() => setSelected(!selected)}
+      onClick={handleClick}
       className={`relative py-2 px-4 rounded border-2 flex flex-col gap-2 text-black dark:text-white hover:shadow-xl shadow-amber-950 dark:shadow-amber-200 cursor-pointer text-left
         ${
           !isAvailable
@@ -32,7 +62,9 @@ const OptionCard = ({
             : null
         }
         ${
-          selected ? "border-amber-300 bg-white/40 dark:bg-black/40" : "border-black dark:border-white"
+          selected
+            ? "border-black bg-white/40 dark:bg-black/40"
+            : "border-amber-300 bg-white/20 dark:border-white"
         }`}
     >
       {!isAvailable && (
