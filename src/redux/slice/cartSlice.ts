@@ -77,13 +77,14 @@ export const cartSlice = createSlice({
       state = state.filter((pizza) => pizza.id != id);
     },
     duplicatePizza: (state, action) => {
-      const id = action.payload;
-      const pizza = state.find((pizza) => pizza.id === id);
+      const pizza = action.payload;
+      console.log(pizza)
       const newData = {
         ...pizza,
         id: state.length + 1,
         title: `Pizza ${state.length + 1}`,
       };
+      console.log(newData)
       state.push(newData);
     },
   },
