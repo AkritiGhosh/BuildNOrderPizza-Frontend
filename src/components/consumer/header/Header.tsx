@@ -1,5 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../../common/Dropdown";
+import ThemeButton from "../../common/ToggleThemeButton";
+import useTheme from "../../../hooks/useTheme";
 
 type NavLinksTypes = {
   path: string;
@@ -8,6 +10,7 @@ type NavLinksTypes = {
 };
 const Header = () => {
   const loc = useLocation();
+  const { darkTheme } = useTheme();
   const path: string = "/" + loc.pathname?.split("/")[1];
   const isLoggedIn: boolean = true;
 
@@ -55,7 +58,9 @@ const Header = () => {
           <Link
             className={`hidden lg:block h-full w-auto px-3 text-lg font-medium leading-[5rem] dark:hover:drop-shadow-[0_0_#fcd34d] hover:drop-shadow-[0_0_#451a03] 
          hover:border-black border-b-2 dark:hover:border-amber-100 ${
-           path == link?.path ? "border-amber-700 dark:border-amber-300 dark:bg-amber-100/10" : "border-transparent"
+           path == link?.path
+             ? "border-amber-700 dark:border-amber-300 dark:bg-amber-100/10"
+             : "border-transparent"
          }`}
             to={link?.path}
             key={link?.id}
@@ -109,6 +114,13 @@ const Header = () => {
               </li>
             </>
           )}
+          <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer flex gap-4 items-center">
+            <ThemeButton />
+            <span className="text-black dark:text-white">
+              {" "}
+              Switch to {darkTheme ? " Light " : " Dark "} mode
+            </span>
+          </li>
         </Dropdown>
       </div>
     </header>

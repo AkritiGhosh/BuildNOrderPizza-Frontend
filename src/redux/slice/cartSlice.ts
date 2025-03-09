@@ -8,6 +8,7 @@ const initialState: PizzaCart[] = [
     crust: "",
     size: "",
     sauce: "",
+    cheese: [],
     toppings: [],
   },
 ];
@@ -68,6 +69,7 @@ export const cartSlice = createSlice({
         crust: "",
         size: "",
         sauce: "",
+        cheese: [],
         toppings: [],
       };
       state.push(newData);
@@ -78,13 +80,11 @@ export const cartSlice = createSlice({
     },
     duplicatePizza: (state, action) => {
       const pizza = action.payload;
-      console.log(pizza)
       const newData = {
         ...pizza,
         id: state.length + 1,
         title: `Pizza ${state.length + 1}`,
       };
-      console.log(newData)
       state.push(newData);
     },
   },

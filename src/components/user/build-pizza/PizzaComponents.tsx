@@ -7,7 +7,7 @@ const PizzaComponents = () => {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const handleAdd = () => dispatch(addNewPizza());
-  console.log("<><><><>", cart);
+
   return (
     <div className="w-full h-full p-4 overflow-y-auto scroll-thin rounded dark:bg-black/80 bg-white/75 backdrop-blur-sm shadow-[0_0_30px] shadow-amber-600/30 border-2 border-white/80 dark:border-black/80">
       <h1 className="mb-5 text-5xl text-amber-950 dark:text-slate-300 text-center font-cursive font-medium tracking-wider">

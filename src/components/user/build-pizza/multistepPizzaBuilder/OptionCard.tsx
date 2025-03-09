@@ -32,12 +32,9 @@ const OptionCard = ({
   const selected = pizza[category] === _id;
 
   const handleClick = () => {
-    console.log("clicked", category, _id);
     switch (category) {
       case "size": {
-        console.log("selected", category, _id);
         dispatch(selectPizzaSize({ id: pizzaId, size: _id }));
-        console.log("done", pizza);
         return;
       }
       case "crust": {

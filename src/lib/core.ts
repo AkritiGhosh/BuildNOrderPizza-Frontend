@@ -1,6 +1,5 @@
 import { UserProfiles } from "./constants";
 
-console.log('import.meta.env.VITE_BACKEND', import.meta.env.VITE_BACKEND)
 const models = {
   AUTH: import.meta.env.VITE_BACKEND + "/auth/",
   USER: import.meta.env.VITE_BACKEND + "/user/",

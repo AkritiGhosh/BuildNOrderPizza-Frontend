@@ -2,7 +2,6 @@ import useTheme from "../../hooks/useTheme";
 
 const ThemeButton = () => {
   const { darkTheme, toggleTheme } = useTheme();
-  console.log(darkTheme);
 
   const getCoordinates = (angle: number, distance: number) => {
     angle = angle * (Math.PI / 180);
