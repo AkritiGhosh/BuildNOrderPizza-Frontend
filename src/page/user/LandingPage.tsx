@@ -3,7 +3,7 @@ import PageLayout from "../../components/common/PageLayout";
 
 const LandingPage = () => {
   return (
-    <PageLayout>
+    <PageLayout withBackground={false}>
       <main
         className={`w-screen h-screen inset-0 bg-cover bg-right bg-fixed overflow-auto bg-[url("src/assets/light_bg.jpg")] dark:bg-[url("src/assets/dark_bg.jpg")]`}
       >
