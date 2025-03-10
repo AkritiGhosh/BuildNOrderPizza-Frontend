@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import Dropdown from "../../common/Dropdown";
-import ThemeButton from "../../common/ToggleThemeButton";
+import Dropdown from "../Dropdown";
+import ThemeButton from "../ToggleThemeButton";
 import useTheme from "../../../hooks/useTheme";
 
 type NavLinksTypes = {
