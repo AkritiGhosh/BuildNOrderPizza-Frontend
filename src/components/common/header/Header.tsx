@@ -88,9 +88,11 @@ const Header = () => {
           }
         >
           {isLoggedIn ? (
-            <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
-              Login
-            </li>
+            <Link to="/auth">
+              <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
+                Login
+              </li>
+            </Link>
           ) : (
             <>
               <li className="relative w-full flex flex-row items-center h-16  py-2 px-4 gap-4">
