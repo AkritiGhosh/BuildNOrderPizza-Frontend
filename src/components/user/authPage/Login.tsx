@@ -5,7 +5,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-6 mt-2">
       <FloatingLabelInput
         type="email"
         label="Enter your email"
@@ -16,6 +16,7 @@ const Login = () => {
       />
       <FloatingLabelInput
         type="password"
+        // pattern= regex for validation
         label="Enter your password"
         name="password"
         id="password"

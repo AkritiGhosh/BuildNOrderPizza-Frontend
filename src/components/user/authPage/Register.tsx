@@ -6,7 +6,7 @@ const Register = () => {
   const [pwd, setPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-6 mt-2">
       <FloatingLabelInput
         type="email"
         label="Enter your email"
