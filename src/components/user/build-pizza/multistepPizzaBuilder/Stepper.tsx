@@ -1,5 +1,3 @@
-import React from "react";
-
 type StepperPropsType = {
   handleStepNavigation: (i: number) => void;
   steps: string[];
