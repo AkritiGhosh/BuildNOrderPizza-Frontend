@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../Dropdown";
 import ThemeButton from "../ToggleThemeButton";
 import useTheme from "../../../hooks/useTheme";
-import useCartDialog from "../../../hooks/useCartDialog";
 
 type NavLinksTypes = {
   path: string;
@@ -11,7 +10,6 @@ type NavLinksTypes = {
 };
 const Header = () => {
   const loc = useLocation();
-  const { openDrawer } = useCartDialog();
   const { darkTheme } = useTheme();
   const path: string = "/" + loc.pathname?.split("/")[1];
   const isLoggedIn: boolean = true;
@@ -49,7 +47,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full fixed top-0 h-14 lg:h-20 lg:px-[5%] px-4 bg-white/85 dark:bg-black/85 text-amber-950 dark:text-white flex items-center justify-between gap-5 z-50 border-b border-amber-700">
+    <header className="w-full relative top-0 h-14 lg:h-20 lg:px-[5%] px-4 bg-white/85 dark:bg-black/85 text-amber-950 dark:text-white flex items-center justify-between gap-5 z-50 border-b border-amber-700">
       <div className="h-14 lg:h-20 w-full">
         <h1 className="!leading-[56px] lg:!leading-[80px] md:text-4xl text-2xl drop-shadow-[0_0_8px_#fcd34d] font-cursive">
           Build N Order Pizza
@@ -70,25 +68,24 @@ const Header = () => {
             {link?.name}
           </Link>
         ))}
-        <button
-          onClick={openDrawer}
-          className="size-10 text-amber-950 dark:text-white rounded-full p-2 group hover:bg-amber-300/20"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 group-hover:stroke-2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-            />
-          </svg>
-        </button>
+        <Link to={"/checkout"}>
+          <button className="size-10 text-amber-950 dark:text-white rounded-full p-2 group hover:bg-amber-300/20">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6 group-hover:stroke-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+              />
+            </svg>
+          </button>
+        </Link>
         <Dropdown
           btnClass="hover:bg-amber-300/20 rounded-full size-10 flex items-center justify-center group"
           lstClass="bg-white dark:bg-black text-black dark:text-white !top-14 md:!top-12 lg:!top-[60px] border-y md:border md:border-t-0 rounded-b-none md:rounded-b-md"

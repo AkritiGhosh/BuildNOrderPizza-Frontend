@@ -19,7 +19,7 @@ const PageLayout = ({
   return (
     <div
       style={{ ...props.style, backgroundSize: "20%" }}
-      className={`relative w-screen h-screen overflow-y-auto scroll-thin flex items-center justify-center ${className} ${
+      className={`relative w-screen h-screen overflow-y-auto overflow-x-hidden scroll-thin flex flex-col ${className} ${
         withBackground
           ? "bg-[url('bg/light.jpg')] dark:bg-[url('bg/dark.jpg')] bg-blend-lighten dark:bg-blend-normal"
           : "bg-white dark:bg-slate-900"
