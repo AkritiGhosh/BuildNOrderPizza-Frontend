@@ -1,22 +1,26 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
-import CreateProfile from "../page/consumer/CreateProfile";
-import Profile from "../page/consumer/Profile";
-import Orders from "../page/consumer/Orders";
-import Settings from "../page/consumer/Settings";
-
-// const AuthPage = lazy(() => import("../page/user/AuthPage"));
-// const ComingSoon = lazy(() => import("../page/user/ComingSoon"));
+const CreateProfile = lazy(() => import("../page/consumer/CreateProfile"));
+const Profile = lazy(() => import("../page/consumer/Profile"));
+const Orders = lazy(() => import("../page/consumer/Orders"));
+const Settings = lazy(() => import("../page/consumer/Settings"));
+const OrderPage = lazy(() => import("../page/consumer/placeOrder/OrderPage"));
 const PageNotFound = lazy(() => import("../page/user/404"));
 const LandingPage = lazy(() => import("../page/user/LandingPage"));
 
 export const customerRoutes: RouteObject[] = [
   { path: "/", Component: LandingPage },
-  { path: "/edit-profile", Component: CreateProfile },
-  { path: "/profile/:id", Component: Profile },
-  { path: "/orders", Component: Orders },
-  { path: "/orders/:orderId", Component: Orders },
+  {
+    path: "/:profileId",
+    children: [
+      { path: "edit-profile", Component: CreateProfile },
+      { path: "profile/", Component: Profile },
+      { path: "orders", Component: Orders },
+      { path: "orders/:orderId", Component: Orders },
+    ],
+  },
   { path: "/settings", Component: Settings },
+  { path: "/checkout", Component: OrderPage },
   { path: "*", Component: PageNotFound },
 ];
 
