@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../Dropdown";
 import ThemeButton from "../ToggleThemeButton";
 import useTheme from "../../../hooks/useTheme";
+import useCartDialog from "../../../hooks/useCartDialog";
 
 type NavLinksTypes = {
   path: string;
@@ -10,6 +11,7 @@ type NavLinksTypes = {
 };
 const Header = () => {
   const loc = useLocation();
+  const { openDrawer } = useCartDialog();
   const { darkTheme } = useTheme();
   const path: string = "/" + loc.pathname?.split("/")[1];
   const isLoggedIn: boolean = true;
@@ -56,7 +58,7 @@ const Header = () => {
       <div className="w-auto md:w-full h-14 lg:h-20 flex items-center justify-end gap-5 z-50">
         {navLinks?.map((link) => (
           <Link
-            className={`hidden lg:block h-full w-auto px-3 text-lg font-medium leading-[5rem] dark:hover:drop-shadow-[0_0_#fcd34d] hover:drop-shadow-[0_0_#451a03] 
+            className={`hidden lg:block h-full w-auto px-3 text-lg font-medium leading-[5rem] dark:hover:drop-shadow-[0_0_#fcd34d] hover:drop-shadow-[0_0_#451a03] hover:bg-amber-300/20
          hover:border-black border-b-2 dark:hover:border-amber-100 ${
            path == link?.path
              ? "border-amber-700 dark:border-amber-300 dark:bg-amber-100/10"
@@ -68,7 +70,27 @@ const Header = () => {
             {link?.name}
           </Link>
         ))}
+        <button
+          onClick={openDrawer}
+          className="size-10 text-amber-950 dark:text-white rounded-full p-2 group hover:bg-amber-300/20"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6 group-hover:stroke-2"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+            />
+          </svg>
+        </button>
         <Dropdown
+          btnClass="hover:bg-amber-300/20 rounded-full size-10 flex items-center justify-center group"
           lstClass="bg-white dark:bg-black text-black dark:text-white !top-14 md:!top-12 lg:!top-[60px] border-y md:border md:border-t-0 rounded-b-none md:rounded-b-md"
           btnChild={
             <svg
@@ -77,7 +99,7 @@ const Header = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 hover:stroke-2 dark:hover:stroke-amber-50 mt-2"
+              className="size-6 group-hover:stroke-2 dark:group-hover:stroke-amber-50"
             >
               <path
                 strokeLinecap="round"

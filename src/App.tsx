@@ -6,6 +6,7 @@ import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
 import Loader from "./components/user/Loader";
 import { ThemeProvider } from "./hooks/useTheme";
+import { CartProvider } from "./hooks/useCartDialog";
 
 function App() {
   const privateRouter = createBrowserRouter([
@@ -15,11 +16,13 @@ function App() {
   const publicRouter = createBrowserRouter(PublicRoutes());
 
   return (
-    <ThemeProvider>
-      <Suspense fallback={<Loader />}>
-        <RouterProvider router={checkAuth() ? privateRouter : publicRouter} />
-      </Suspense>
-    </ThemeProvider>
+    <Suspense fallback={<Loader />}>
+      <CartProvider>
+        <ThemeProvider>
+          <RouterProvider router={checkAuth() ? privateRouter : publicRouter} />
+        </ThemeProvider>
+      </CartProvider>
+    </Suspense>
   );
 }
 
