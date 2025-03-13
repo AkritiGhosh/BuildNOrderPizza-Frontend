@@ -1,15 +1,23 @@
-import { createContext, ReactNode, useContext, useEffect } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { useState } from "react";
+import CartDrawer from "../components/common/cart/Drawer";
 
-const CartContext = createContext({ openCart: false, toggleDialog: () => {} });
+const CartContext = createContext({
+  isCartOpen: false,
+  openDrawer: () => {},
+  closeDrawer: () => {},
+});
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [openCart, setOpenCart] = useState(false);
-  const toggleDialog = () => setOpenCart((prev) => !prev);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const openDrawer = () => setIsCartOpen(true);
+  const closeDrawer = () => setIsCartOpen(false);
 
+  console.log(isCartOpen);
   return (
-    <CartContext.Provider value={{ openCart, toggleDialog }}>
+    <CartContext.Provider value={{ isCartOpen, closeDrawer, openDrawer }}>
       {children}
+      {isCartOpen ? <CartDrawer /> : null}
     </CartContext.Provider>
   );
 };
