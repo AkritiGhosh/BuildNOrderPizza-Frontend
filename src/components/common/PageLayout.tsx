@@ -20,7 +20,7 @@ const PageLayout = ({
       {...props}
     >
       {withHeader && <Header />}
-      {children}
+      <main className="container mx-auto px-4 md:px-[2.5%] lg:px-[5%] pt-6 pb-4">{children}</main>
     </div>
   );
 };
