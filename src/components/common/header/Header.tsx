@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../Dropdown";
 import ThemeButton from "../ToggleThemeButton";
-import useTheme from "../../../hooks/useTheme";
 
 type NavLinksTypes = {
   path: string;
@@ -85,84 +84,80 @@ const navLinks: NavLinksTypes[] = [
     ),
   },
 ];
+const menuLinks: NavLinksTypes[] = [
+  {
+    name: "Settings",
+    path: "/settings",
+    id: "settings",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-5 group-hover:stroke-2"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+        />
+      </svg>
+    ),
+  },
+  {
+    name: "Order history",
+    path: "/profile/orders",
+    id: "orders",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-5 group-hover:stroke-2"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3"
+        />
+      </svg>
+    ),
+  },
+];
 
 const Header = () => {
   const loc = useLocation();
-  const { darkTheme } = useTheme();
   const path: string = "/" + loc.pathname?.split("/")[1];
   const isLoggedIn: boolean = true;
 
-  const menuLinks: NavLinksTypes[] = [
-    {
-      name: "Settings",
-      path: "/settings",
-      id: "settings",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-5 group-hover:stroke-2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-          />
-        </svg>
-      ),
-    },
-    {
-      name: "Order history",
-      path: "/profile/orders",
-      id: "orders",
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-5 group-hover:stroke-2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3"
-          />
-        </svg>
-      ),
-    },
-  ];
-
   return (
-    <header className="w-full relative top-0 h-14 lg:h-20 lg:px-[5%] px-4 bg-white/85 dark:bg-black/85 text-amber-950 dark:text-white flex items-center justify-between gap-5 z-50 border-b border-amber-700">
-      <div className="h-14 lg:h-20 w-full">
-        <h1 className="!leading-[56px] lg:!leading-[80px] md:text-4xl text-2xl drop-shadow-[0_0_8px_#fcd34d] font-cursive">
-          Build N Order Pizza
-        </h1>
-      </div>
-      <div className="grow w-full h-14 lg:h-20 flex items-center justify-end gap-5 z-50">
+    <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 lg:px-[5%] px-4 text-black dark:text-white flex flex-col md:flex-row items-end justify-between gap-x-5 z-50 shadow shadow-amber-500 dark:shadow-slate-200">
+      <h1 className="h-auto lg:h-20 w-full md:w-auto min-w-max text-center md:text-left md:text-4xl text-3xl drop-shadow-[0_0_20px_#fcd34d] dark:drop-shadow-[0_0_30px_#cbd5e1] font-cursive !leading-[40px] lg:!leading-[80px] py-2 md:py-0">
+        Build N Order Pizza
+      </h1>
+      <div className="grow w-full h-10 lg:h-20 flex items-center justify-evenly md:justify-end gap-5 z-50">
         {navLinks?.map((link) => (
           <Link
-            className={`hidden lg:flex items-center justify-center gap-4 h-full w-auto px-3 text-lg font-medium leading-[5rem] dark:hover:drop-shadow-[0_0_#fcd34d] hover:drop-shadow-[0_0_#451a03] hover:bg-amber-300/20
-         hover:border-black border-b-2 dark:hover:border-amber-100 ${
-           path == link?.path
-             ? "border-amber-700 dark:border-amber-300 dark:bg-amber-100/10"
-             : "border-transparent"
-         }`}
+            className={`flex items-center justify-center gap-2.5 h-full w-auto px-3 text-lg font-medium leading-[5rem] ${
+              path == link?.path
+                ? "border-amber-700 dark:border-slate-300 bg-amber-200/40 dark:bg-slate-700/80"
+                : "border-transparent bg-transparent dark:text-slate-400 text-amber-950"
+            } hover:bg-amber-300/20 dark:hover:bg-slate-500/30
+         hover:border-black border-b-2 dark:hover:border-slate-100 `}
             to={link?.path}
             key={link?.id}
           >
             {link.icon}
-            {link?.name}
+            <span className="hidden lg:block">{link?.name}</span>
           </Link>
         ))}
         <Dropdown
@@ -185,6 +180,9 @@ const Header = () => {
             </svg>
           }
         >
+          <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer hover:bg-amber-200/30 dark:hover:bg-slate-400/30">
+            <ThemeButton />
+          </li>
           {!isLoggedIn ? (
             <Link to="/auth">
               <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
@@ -203,7 +201,7 @@ const Header = () => {
                 <Link to={menuItem?.path}>
                   <li
                     id={menuItem?.id}
-                    className="w-full py-2.5 px-4 text-sm hover:bg-amber-200/30 hover:font-semibold flex items-center justify-start gap-2.5 group"
+                    className="w-full py-2.5 px-4 text-sm hover:bg-amber-200/30 dark:hover:bg-slate-400/30 hover:font-semibold flex items-center justify-start gap-2.5 group"
                   >
                     {menuItem?.icon}
                     {menuItem?.name}
@@ -229,12 +227,6 @@ const Header = () => {
               </li>
             </>
           )}
-          <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer flex gap-4 items-center">
-            <ThemeButton />
-            <span className="text-black dark:text-white">
-              Switch to {darkTheme ? " Light " : " Dark "} mode
-            </span>
-          </li>
         </Dropdown>
       </div>
     </header>

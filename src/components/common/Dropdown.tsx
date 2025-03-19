@@ -17,7 +17,8 @@ const Dropdown = ({
 }: DropdownPropTypes) => {
   const [showMenu, setShowMenu] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const alignClass = alignment == "right" ? "right-0 md:-right-2" : "left-0 md:-left-2";
+  const alignClass =
+    alignment == "right" ? "right-0 md:-right-2" : "left-0 md:-left-2";
   const handleClick = (e: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -44,7 +45,7 @@ const Dropdown = ({
       </button>
       {showMenu && (
         <ul
-          className={`fixed md:absolute top-20 md:top-12 -mt-0.5  ${alignClass} min-h-10 list-none w-screen md:w-72 max-h-[200px] overflow-y-auto rounded-b-md bg-white scroll-hide z-[999] border-t border-amber-700 ${lstClass}`}
+          className={`fixed md:absolute top-20 md:top-12  ${alignClass} min-h-10 list-none w-screen md:w-72 max-h-[280px] overflow-y-auto rounded-b-md bg-white dark:bg-slate-900 scroll-hide z-[999] border-t border-amber-700 dark:border-slate-500 ${lstClass}`}
         >
           {children}
         </ul>
