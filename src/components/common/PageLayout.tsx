@@ -16,7 +16,6 @@ const PageLayout = ({
 }: LayoutProps) => {
   return (
     <div
-      style={{ ...props.style, backgroundSize: "20%" }}
       className={`relative w-screen h-screen overflow-y-auto overflow-x-hidden scroll-thin flex flex-col ${className} bg-amber-50 dark:bg-slate-900 text-amber-950 dark:text-slate-100 `}
       {...props}
     >
