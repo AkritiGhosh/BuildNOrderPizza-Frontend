@@ -5,7 +5,7 @@ import ThemeButton from "../ToggleThemeButton";
 type NavLinksTypes = {
   path: string;
   name: string;
-  id: string;
+  id: string ;
   icon: JSX.Element;
 };
 
@@ -44,14 +44,14 @@ const navLinks: NavLinksTypes[] = [
         viewBox="0 0 32 32"
         fill="currentColor"
         stroke="currentColor"
-        stroke-width="0.45"
+        strokeWidth="0.45"
         className="size-6 group-hover:stroke-1"
       >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
           id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         ></g>
         <g id="SVGRepo_iconCarrier">
           <path
@@ -64,7 +64,7 @@ const navLinks: NavLinksTypes[] = [
   },
   {
     path: "/cart",
-    name: "Open cart",
+    name: "Cart",
     id: "cart",
     icon: (
       <svg
@@ -140,94 +140,96 @@ const Header = () => {
   const isLoggedIn: boolean = true;
 
   return (
-    <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 lg:px-[5%] px-4 text-black dark:text-white flex flex-col md:flex-row items-end justify-between gap-x-5 z-50 shadow shadow-amber-500 dark:shadow-slate-200">
-      <h1 className="h-auto lg:h-20 w-full md:w-auto min-w-max text-center md:text-left md:text-4xl text-3xl drop-shadow-[0_0_20px_#fcd34d] dark:drop-shadow-[0_0_30px_#cbd5e1] font-cursive !leading-[40px] lg:!leading-[80px] py-2 md:py-0">
-        Build N Order Pizza
-      </h1>
-      <div className="grow w-full h-10 lg:h-20 flex items-center justify-evenly md:justify-end gap-5 z-50">
-        {navLinks?.map((link) => (
-          <Link
-            className={`flex items-center justify-center gap-2.5 h-full w-auto px-3 text-lg font-medium leading-[5rem] ${
-              path == link?.path
-                ? "border-amber-700 dark:border-slate-300 bg-amber-200/40 dark:bg-slate-700/80"
-                : "border-transparent bg-transparent dark:text-slate-400 text-amber-950"
-            } hover:bg-amber-300/20 dark:hover:bg-slate-500/30
-         hover:border-black border-b-2 dark:hover:border-slate-100 `}
-            to={link?.path}
-            key={link?.id}
-          >
-            {link.icon}
-            <span className="hidden lg:block">{link?.name}</span>
-          </Link>
-        ))}
-        <Dropdown
-          btnClass="hover:bg-amber-300/20 rounded-full size-10 flex items-center justify-center group"
-          lstClass="bg-white dark:bg-black text-black dark:text-white !top-14 md:!top-12 lg:!top-[60px] border-y md:border md:border-t-0 rounded-b-none md:rounded-b-md"
-          btnChild={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6 group-hover:stroke-2 dark:group-hover:stroke-amber-50"
+    <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 text-black dark:text-white z-50 shadow shadow-amber-500 dark:shadow-slate-200">
+      <div className="container relative h-auto md:h-full mx-auto px-4 md:px-[2.5%] lg:px-[5%] flex flex-col md:flex-row items-end justify-between gap-x-5">
+        <h1 className="h-auto lg:h-20 w-full md:w-auto min-w-max text-center md:text-left md:text-4xl text-3xl drop-shadow-[0_0_20px_#fcd34d] dark:drop-shadow-[0_0_30px_#cbd5e1] font-cursive !leading-[40px] lg:!leading-[80px] py-2 md:py-0">
+          Build N Order Pizza
+        </h1>
+        <div className="grow w-full h-10 lg:h-20 flex items-center justify-evenly md:justify-end gap-5 z-50">
+          {navLinks?.map((link) => (
+            <Link
+              className={`flex items-center justify-center gap-2.5 h-full w-auto px-3 text-lg font-medium leading-[5rem] ${
+                path == link?.path
+                  ? "border-amber-700 dark:border-slate-300 bg-amber-200/40 dark:bg-slate-700/80"
+                  : "border-transparent bg-transparent dark:text-slate-400 text-amber-950"
+              } hover:bg-amber-300/20 dark:hover:bg-slate-500/30
+           hover:border-black border-b-2 dark:hover:border-slate-100 `}
+              to={link?.path}
+              key={link?.id}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          }
-        >
-          <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer hover:bg-amber-200/30 dark:hover:bg-slate-400/30">
-            <ThemeButton />
-          </li>
-          {!isLoggedIn ? (
-            <Link to="/auth">
-              <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
-                Login
-              </li>
+              {link.icon}
+              <span className="hidden lg:block">{link?.name}</span>
             </Link>
-          ) : (
-            <>
-              <li className="relative w-full flex flex-row items-center h-16  py-2 px-4 gap-4">
-                <span className="w-10 h-10 rounded-full bg-purple-600 text-white text-xl font-bold flex items-center justify-center">
-                  U
-                </span>
-                <span className="text-xl font-medium">User name</span>
-              </li>
-              {menuLinks?.map((menuItem) => (
-                <Link to={menuItem?.path}>
-                  <li
-                    id={menuItem?.id}
-                    className="w-full py-2.5 px-4 text-sm hover:bg-amber-200/30 dark:hover:bg-slate-400/30 hover:font-semibold flex items-center justify-start gap-2.5 group"
+          ))}
+          <Dropdown
+            btnClass="hover:bg-amber-300/20 dark:hover:bg-slate-300/30 rounded-full size-10 flex items-center justify-center group"
+            lstClass="bg-white dark:bg-black text-black dark:text-white !top-14 md:!top-12 lg:!top-[60px] border-y md:border md:border-t-0 rounded-b-none md:rounded-b-md"
+            btnChild={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6 group-hover:stroke-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            }
+          >
+            <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer hover:bg-amber-200/30 dark:hover:bg-slate-400/30">
+              <ThemeButton />
+            </li>
+            {!isLoggedIn ? (
+              <Link to="/auth">
+                <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
+                  Login
+                </li>
+              </Link>
+            ) : (
+              <>
+                <li className="relative w-full flex flex-row items-center h-16  py-2 px-4 gap-4">
+                  <span className="w-10 h-10 rounded-full bg-purple-600 text-white text-xl font-bold flex items-center justify-center">
+                    U
+                  </span>
+                  <span className="text-xl font-medium">User name</span>
+                </li>
+                {menuLinks?.map((menuItem) => (
+                  <Link key={menuItem?.id} to={menuItem?.path}>
+                    <li
+                      id={menuItem?.id}
+                      className="w-full py-2.5 px-4 text-sm hover:bg-amber-200/30 dark:hover:bg-slate-400/30 hover:font-semibold flex items-center justify-start gap-2.5 group"
+                    >
+                      {menuItem?.icon}
+                      {menuItem?.name}
+                    </li>
+                  </Link>
+                ))}
+                <li className="w-full py-2 px-4  text-sm text-red-500 hover:bg-red-200/20 hover:font-bold cursor-pointer  flex items-center justify-start gap-2.5 group">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5 group-hover:stroke-2"
                   >
-                    {menuItem?.icon}
-                    {menuItem?.name}
-                  </li>
-                </Link>
-              ))}
-              <li className="w-full py-2 px-4  text-sm text-red-500 hover:bg-red-200/20 hover:font-bold cursor-pointer  flex items-center justify-start gap-2.5 group">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-5 group-hover:stroke-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
-                  />
-                </svg>
-                Log out
-              </li>
-            </>
-          )}
-        </Dropdown>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                    />
+                  </svg>
+                  Log out
+                </li>
+              </>
+            )}
+          </Dropdown>
+        </div>
       </div>
     </header>
   );
