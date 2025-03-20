@@ -1,5 +1,6 @@
 import PizzaAccordion from "../../components/common/accordion/PizzaAccordion";
 import Button from "../../components/common/button/Button";
+import Heading from "../../components/common/Heading";
 import PageLayout from "../../components/common/PageLayout";
 import MultiStepForm from "../../components/user/build-pizza/multistepPizzaBuilder/MultiStepForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
@@ -12,9 +13,7 @@ const BuildPizza = () => {
 
   return (
     <PageLayout>
-      <h1 className="mb-5 text-5xl text-amber-950 dark:text-slate-300 text-center font-cursive font-medium tracking-wider">
-        Build your pizza
-      </h1>
+      <Heading>Build your pizza</Heading>
       {cart?.map((cartData) => (
         <PizzaAccordion pizzaId={cartData.id} key={cartData.id}>
           <MultiStepForm pizzaId={cartData.id} />
@@ -23,7 +22,6 @@ const BuildPizza = () => {
       <Button onClick={handleAdd} type="filled">
         Add another pizza
       </Button>
-     
     </PageLayout>
   );
 };
