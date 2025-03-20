@@ -76,7 +76,7 @@ const ThemeButton = () => {
           fill="white"
           className={`transition-all duration-100 ease-in-out origin-center z-30 ${
             !darkTheme
-              ? "-translate-x-12 translate-y-12 scale-100"
+              ? "-translate-x-12 translate-y-12 scale-100 fill-white group-hover:fill-[#fef7dc]"
               : "translate-x-0 translate-y-0 scale-0"
           }`}
         />

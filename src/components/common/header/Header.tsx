@@ -181,7 +181,7 @@ const Header = () => {
               </svg>
             }
           >
-            <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer hover:bg-amber-200/30 dark:hover:bg-slate-400/30">
+            <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer hover:bg-amber-200/30 dark:hover:bg-slate-400/30 group">
               <ThemeButton />
             </li>
             {!isLoggedIn ? (
