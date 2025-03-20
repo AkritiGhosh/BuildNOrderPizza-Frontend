@@ -6,12 +6,14 @@ type LayoutProps = {
   withHeader?: boolean;
   className?: string;
   style?: object;
+  childrenClassName?: string;
 };
 
 const PageLayout = ({
   children,
   withHeader = true,
   className = "",
+  childrenClassName = "",
   ...props
 }: LayoutProps) => {
   return (
@@ -20,7 +22,11 @@ const PageLayout = ({
       {...props}
     >
       {withHeader && <Header />}
-      <main className="container mx-auto px-4 md:px-[2.5%] lg:px-[5%] pt-6 pb-4">{children}</main>
+      <main
+        className={`container h-auto lg:h-full grow mx-auto px-4 md:px-[2.5%] lg:px-[5%] pt-6 pb-4 ${childrenClassName}`}
+      >
+        {children}
+      </main>
     </div>
   );
 };
