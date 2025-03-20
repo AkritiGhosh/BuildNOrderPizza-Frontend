@@ -140,7 +140,7 @@ const Header = () => {
   const isLoggedIn: boolean = true;
 
   return (
-    <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 text-black dark:text-white z-50 shadow shadow-amber-500 dark:shadow-slate-200">
+    <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 bg-amber-50/80 dark:bg-slate-950/80 text-black dark:text-white z-50 shadow shadow-amber-500 dark:shadow-slate-200">
       <div className="container relative h-auto md:h-full mx-auto px-4 md:px-[2.5%] lg:px-[5%] flex flex-col md:flex-row items-end justify-between gap-x-5">
         <h1 className="h-auto lg:h-20 w-full md:w-auto min-w-max text-center md:text-left md:text-4xl text-3xl drop-shadow-[0_0_20px_#fcd34d] dark:drop-shadow-[0_0_30px_#cbd5e1] font-cursive !leading-[40px] lg:!leading-[80px] py-2 md:py-0">
           Build N Order Pizza
@@ -150,10 +150,10 @@ const Header = () => {
             <Link
               className={`flex items-center justify-center gap-2.5 h-full w-auto px-3 text-lg font-medium leading-[5rem] ${
                 path == link?.path
-                  ? "border-amber-700 dark:border-slate-300 bg-amber-200/40 dark:bg-slate-700/80"
+                  ? "border-amber-700 dark:border-slate-300 bg-amber-200/40 dark:bg-slate-700/80 text-amber-700 dark:text-slate-100"
                   : "border-transparent bg-transparent dark:text-slate-400 text-amber-950"
               } hover:bg-amber-300/20 dark:hover:bg-slate-500/30
-           hover:border-black border-b-2 dark:hover:border-slate-100 `}
+           hover:border-amber-300 border-b-2 dark:hover:border-slate-100 `}
               to={link?.path}
               key={link?.id}
             >
