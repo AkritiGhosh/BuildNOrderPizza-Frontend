@@ -9,7 +9,7 @@ type CardPropType = {
   pizzaId: number;
   _id: string;
   name: string;
-  img?: string;
+  imgSrc?: string;
   price: number;
   isAvailable: boolean;
   category: "size" | "crust" | "toppings" | "cheese" | "sauce";
@@ -19,7 +19,7 @@ const OptionCard = ({
   pizzaId,
   _id = "",
   name,
-  img = "",
+  imgSrc = "",
   price,
   isAvailable,
   category,
@@ -52,16 +52,16 @@ const OptionCard = ({
   return (
     <button
       onClick={handleClick}
-      className={`relative py-2 px-4 rounded border-2 flex flex-col gap-2 text-black dark:text-white hover:shadow-xl shadow-amber-950 dark:shadow-amber-200 cursor-pointer text-left
+      className={`relative py-2 px-4 rounded border flex flex-col gap-2 text-black dark:text-white bg-white dark:bg-black hover:shadow-[0_0_6px]  cursor-pointer text-left
         ${
           !isAvailable
             ? "cursor-not-allowed pointer-events-none opacity-50"
-            : null
+            : ""
         }
         ${
           selected
-            ? "border-black bg-white/40 dark:bg-black/40"
-            : "border-amber-300 bg-white/20 dark:border-white"
+            ? "border-black dark:border-white hover:shadow-black dark:hover:shadow-white"
+            : "border-amber-300 dark:border-slate-700 hover:shadow-amber-600 dark:hover:shadow-slate-500"
         }`}
     >
       {!isAvailable && (
@@ -84,7 +84,7 @@ const OptionCard = ({
           </span>
         </div>
       )}
-      {img && <img src={img} className="" />}
+      {imgSrc && <img src={imgSrc} className="" />}
       <h1>{name}</h1>
       <p>₹{price}</p>
     </button>
