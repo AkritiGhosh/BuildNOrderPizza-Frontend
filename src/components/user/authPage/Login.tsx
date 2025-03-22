@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FloatingLabelInput from "../../common/FloatingLabelInput";
+import Button from "../../common/button/Button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,9 +24,9 @@ const Login = () => {
         value={pwd}
         setValue={setPwd}
       />
-      <button className="w-auto h-12 py-2 px-4 rounded-md text-base bg-amber-800 text-white font-bold hover:bg-amber-700">
-        Log in
-      </button>
+      <Button onClick={() => {}} type="filled" size="lg">
+        Log in 
+      </Button>
     </div>
   );
 };

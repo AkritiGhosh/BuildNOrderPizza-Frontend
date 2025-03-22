@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FloatingLabelInput from "../../common/FloatingLabelInput";
+import Button from "../../common/button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
@@ -31,9 +34,9 @@ const Register = () => {
         value={confirmPwd}
         setValue={setConfirmPwd}
       />
-      <button className="w-auto h-12 py-2 px-4 rounded-md text-base bg-amber-800 text-white font-bold hover:bg-amber-700">
+      <Button onClick={() => {nav('/1/edit-profile')}} type="filled" size="lg">
         Create profile
-      </button>
+      </Button>
     </div>
   );
 };

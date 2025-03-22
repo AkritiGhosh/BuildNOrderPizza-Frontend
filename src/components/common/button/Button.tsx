@@ -32,7 +32,7 @@ const Button = ({
   return (
     <button
       {...props}
-      className={`relative w-auto ${btnSize} flex items-center border rounded hover:shadow hover:shadow-amber-200 dark:hover:shadow-slate-300 font-medium hover:font-semibold text-black dark:text-white ${style}  ${className}`}
+      className={`relative w-auto ${btnSize} flex items-center justify-center border rounded hover:shadow hover:shadow-amber-200 dark:hover:shadow-slate-300 font-medium hover:font-semibold text-black dark:text-white ${style}  ${className}`}
     >
       {children}
     </button>
