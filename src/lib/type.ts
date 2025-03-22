@@ -4,6 +4,13 @@ export type UserContextType = {
   setTheme: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export type UserProfile = {
+  user: string;
+  name: string
+  email: string
+  gender : "Male" | "Female"
+}
+
 export type PizzaOption = {
   isAvailable: boolean;
   name: string;
@@ -40,3 +47,4 @@ export type PizzaCart = {
 }
 
 export type FormStepsType = "size" | "crust" | "toppings" | "cheese" | "sauce";
+
