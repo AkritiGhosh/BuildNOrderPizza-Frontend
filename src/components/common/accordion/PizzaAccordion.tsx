@@ -1,7 +1,6 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { duplicatePizza, removePizza } from "../../../redux/slice/cartSlice";
-import { PizzaCart } from "../../../lib/type";
 
 const PizzaAccordion = ({
   pizzaId,
@@ -22,7 +21,7 @@ const PizzaAccordion = ({
   const copyPizzaData = () => dispatch(duplicatePizza(pizza));
 
   return (
-    <div className="w-full p-2 rounded-lg border border-amber-500 mb-4 last:mb-0">
+    <div className="w-full p-2 rounded-lg border border-amber-300/50 dark:border-slate-400/50 bg-amber-50/80 dark:bg-slate-950/80 mb-4 last:mb-0">
       <div
         className={`w-full h-12 px-2 py-1 flex items-center justify-between text-base ${
           open
