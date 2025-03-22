@@ -1,7 +1,7 @@
 import PizzaAccordion from "../../components/common/accordion/PizzaAccordion";
 import Button from "../../components/common/button/Button";
 import Heading from "../../components/common/Heading";
-import PageLayout from "../../components/common/PageLayout";
+import PageLayout from "../../layout/PageLayout";
 import MultiStepForm from "../../components/user/build-pizza/multistepPizzaBuilder/MultiStepForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { addNewPizza } from "../../redux/slice/cartSlice";

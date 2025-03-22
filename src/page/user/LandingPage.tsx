@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import PageLayout from "../../components/common/PageLayout";
+import PageLayout from "../../layout/PageLayout";
 
 const LandingPage = () => {
   return (

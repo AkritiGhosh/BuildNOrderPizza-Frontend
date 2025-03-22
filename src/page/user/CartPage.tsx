@@ -1,4 +1,4 @@
-import PageLayout from "../../components/common/PageLayout";
+import PageLayout from "../../layout/PageLayout";
 import Heading from "../../components/common/Heading";
 import { useNavigate } from "react-router-dom";
 

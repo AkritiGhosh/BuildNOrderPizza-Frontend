@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import Login from "../../components/user/authPage/Login";
 import Register from "../../components/user/authPage/Register";
-import PageLayout from "../../components/common/PageLayout";
+import PageLayout from "../../layout/PageLayout";
 
 type authAction = "login" | "register";
 const AuthPage = () => {

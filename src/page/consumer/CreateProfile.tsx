@@ -2,7 +2,7 @@ import { useState } from "react";
 import Heading from "../../components/common/Heading";
 import FloatingLabelInput from "../../components/common/FloatingLabelInput";
 import { UserProfile } from "../../lib/type";
-import PageLayout from "../../components/common/PageLayout";
+import PageLayout from "../../layout/PageLayout";
 
 const initialData: UserProfile = {
   name: "",
