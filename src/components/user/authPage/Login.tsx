@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FloatingLabelInput from "../../common/FloatingLabelInput";
 import Button from "../../common/button/Button";
 

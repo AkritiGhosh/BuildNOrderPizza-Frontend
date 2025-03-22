@@ -5,6 +5,7 @@ import { UserProfile } from "../../lib/type";
 import PageLayout from "../../layout/PageLayout";
 import FormLayout from "../../layout/FormLayout";
 import { useParams } from "react-router-dom";
+import Button from "../../components/common/button/Button";
 
 const initialData: UserProfile = {
   name: "",
@@ -33,7 +34,9 @@ const ProfileForm = () => {
     <PageLayout>
       <FormLayout>
         <>
-          <Heading>{createNew ? "Create your profile" : "Edit profile"}</Heading>
+          <Heading>
+            {createNew ? "Create your profile" : "Edit profile"}
+          </Heading>
           <div className="w-full mb-3">
             <FloatingLabelInput
               type="text"
@@ -81,6 +84,9 @@ const ProfileForm = () => {
               setValue={(val) => setFormData("email", String(val))}
             />
           </div>
+          <Button onClick={() => {}} type="filled" size="lg" className="w-full">
+            {createNew ? "Create profile" : "Save changes"}
+          </Button>
         </>
       </FormLayout>
     </PageLayout>
