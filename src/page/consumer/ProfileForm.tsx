@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Heading from "../../components/common/Heading";
 import FloatingLabelInput from "../../components/common/FloatingLabelInput";
 import { UserProfile } from "../../lib/type";
 import PageLayout from "../../layout/PageLayout";
 import FormLayout from "../../layout/FormLayout";
+import { useParams } from "react-router-dom";
 
 const initialData: UserProfile = {
   name: "",
@@ -12,8 +13,18 @@ const initialData: UserProfile = {
   user: "",
 };
 
-const CreateProfile = () => {
+const ProfileForm = () => {
+  const [createNew, setCreateNew] = useState<boolean>(true);
   const [form, setForm] = useState<UserProfile>(initialData);
+  const params = useParams();
+
+  useEffect(() => {
+    if (params?.profileId) getProfileData();
+  }, [params]);
+
+  const getProfileData = async () => {
+    setCreateNew(false);
+  };
 
   const setFormData = (key: string, value: string) =>
     setForm({ ...form, [key]: value });
@@ -22,7 +33,7 @@ const CreateProfile = () => {
     <PageLayout>
       <FormLayout>
         <>
-          <Heading>Create your profile</Heading>
+          <Heading>{createNew ? "Create your profile" : "Edit profile"}</Heading>
           <div className="w-full mb-3">
             <FloatingLabelInput
               type="text"
@@ -76,4 +87,4 @@ const CreateProfile = () => {
   );
 };
 
-export default CreateProfile;
+export default ProfileForm;

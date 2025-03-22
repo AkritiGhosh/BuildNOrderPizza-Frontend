@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
-const CreateProfile = lazy(() => import("../page/consumer/CreateProfile"));
+const ProfileForm = lazy(() => import("../page/consumer/ProfileForm"));
 const Profile = lazy(() => import("../page/consumer/Profile"));
 const Orders = lazy(() => import("../page/consumer/Orders"));
 const Settings = lazy(() => import("../page/consumer/Settings"));
@@ -10,10 +10,11 @@ const LandingPage = lazy(() => import("../page/user/LandingPage"));
 
 export const customerRoutes: RouteObject[] = [
   { path: "/", Component: LandingPage },
+  { path: "/create-profile", Component: ProfileForm },
   {
     path: "/:profileId",
     children: [
-      { path: "edit-profile", Component: CreateProfile },
+      { path: "edit-profile", Component: ProfileForm },
       { path: "profile/", Component: Profile },
       { path: "orders", Component: Orders },
       { path: "orders/:orderId", Component: Orders },
