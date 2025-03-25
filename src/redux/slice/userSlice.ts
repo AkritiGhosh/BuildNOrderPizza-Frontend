@@ -6,7 +6,7 @@ const initialState = {
   name: "",
   address: [],
   phone: "",
-  orders: [],
+  profileId:""
 };
 
 const userSlice = createSlice({
