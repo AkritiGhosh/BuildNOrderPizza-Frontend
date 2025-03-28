@@ -15,22 +15,28 @@ const initialState: AuthState = {
   error: null,
 };
 
-const login = createAsyncThunk(
-  "auth/log",
+export const login = createAsyncThunk(
+  "auth/login",
   async (
     { email, password }: { email: string; password: string },
     { rejectWithValue }
   ) => {
     try {
-      const api = "";
-      const response : APIResponse = await fetch(api, {
+      const api = "http://localhost:8020/login";
+      const response = await fetch(api, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      if (response?.success) {
-        const { token, user } = response.data;
-        sessionStorage.setItem("user", JSON.stringify(user));
+      const json: APIResponse = await response?.json();
+      console.log(json);
+      if (json?.success) {
+        const { token, user } = json.data;
+        if (!user || !token) throw new Error("No user found");
+        console.log(Object.keys(user));
+        for (const item of Object.keys(user))
+          sessionStorage.setItem(item, user[item]);
+        // console.log(item, user[item]);
         sessionStorage.setItem("token", token);
         return { token, user };
       }
@@ -40,10 +46,9 @@ const login = createAsyncThunk(
   }
 );
 
-const logout = createAsyncThunk("auth/log", async () => {
-  sessionStorage.removeItem("user");
-  sessionStorage.removeItem("user");
-});
+export const logout = createAsyncThunk("auth/log", () =>
+  sessionStorage.clear()
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -63,7 +68,7 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action?.payload ?? 'Error occured';
+        state.error = action?.payload ?? "Error occured";
       })
       .addCase(logout.fulfilled, (state) => {
         state.loading = false;
