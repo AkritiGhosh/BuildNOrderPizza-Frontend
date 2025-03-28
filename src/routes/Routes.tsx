@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Outlet, RouteObject } from "react-router-dom";
+import { Outlet, RouteObject, useNavigate } from "react-router-dom";
 const BuildPizza = lazy(() => import("../page/user/BuildPizza"));
 const CartPage = lazy(() => import("../page/user/CartPage"));
 const PageNotFound = lazy(() => import("../page/user/404"));
@@ -13,8 +13,13 @@ const Settings = lazy(() => import("../page/consumer/Settings"));
 const OrderPage = lazy(() => import("../page/consumer/placeOrder/OrderPage"));
 
 const AuthenticatedRoutes = () => {
-  const isAuthenticated = true;
-  if (!isAuthenticated) return null;
+  const nav = useNavigate();
+  const token: string | null = sessionStorage.getItem("token");
+  const uid: string | null = sessionStorage.getItem("_id");
+  if (!(token && uid)) {
+    nav("/auth");
+    return;
+  }
   return <Outlet />;
 };
 const Routes: RouteObject[] = [
