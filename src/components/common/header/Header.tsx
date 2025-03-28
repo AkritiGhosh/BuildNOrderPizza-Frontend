@@ -1,11 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../button/Dropdown";
 import ThemeButton from "./ToggleThemeButton";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { logout } from "../../../redux/slice/authSlice";
 
 type NavLinksTypes = {
   path: string;
   name: string;
-  id: string ;
+  id: string;
   icon: JSX.Element;
 };
 
@@ -135,10 +137,14 @@ const menuLinks: NavLinksTypes[] = [
 ];
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const loc = useLocation();
   const path: string = "/" + loc.pathname?.split("/")[1];
-  const isLoggedIn: boolean = true;
+  const isLoggedIn: boolean = sessionStorage.getItem("token") ? true : false;
+  const name: string = sessionStorage.getItem("name") ?? "";
 
+  const handleLogout = () => dispatch(logout());
+  
   return (
     <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 bg-amber-50/80 dark:bg-slate-950/80 text-black dark:text-white z-50 shadow shadow-amber-500 dark:shadow-slate-200">
       <div className="container relative h-auto md:h-full mx-auto px-4 md:px-[2.5%] lg:px-[5%] flex flex-col md:flex-row items-end justify-between gap-x-5">
@@ -194,9 +200,9 @@ const Header = () => {
               <>
                 <li className="relative w-full flex flex-row items-center h-16  py-2 px-4 gap-4">
                   <span className="w-10 h-10 rounded-full bg-purple-600 text-white text-xl font-bold flex items-center justify-center">
-                    U
+                    {name[0]}
                   </span>
-                  <span className="text-xl font-medium">User name</span>
+                  <span className="text-xl font-medium">{name}</span>
                 </li>
                 {menuLinks?.map((menuItem) => (
                   <Link key={menuItem?.id} to={menuItem?.path}>
@@ -209,7 +215,10 @@ const Header = () => {
                     </li>
                   </Link>
                 ))}
-                <li className="w-full py-2 px-4  text-sm text-red-500 hover:bg-red-200/20 hover:font-bold cursor-pointer  flex items-center justify-start gap-2.5 group">
+                <button
+                  onClick={handleLogout}
+                  className="w-full py-2 px-4  text-sm text-red-500 hover:bg-red-200/20 hover:font-bold cursor-pointer  flex items-center justify-start gap-2.5 group"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -225,7 +234,7 @@ const Header = () => {
                     />
                   </svg>
                   Log out
-                </li>
+                </button>
               </>
             )}
           </Dropdown>
