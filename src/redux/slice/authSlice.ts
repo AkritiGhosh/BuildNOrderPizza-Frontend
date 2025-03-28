@@ -1,17 +1,53 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { APIResponse, User } from "../../lib/type";
 
-const login = createAsyncThunk("auth/log", async () => {});
+export interface AuthState {
+  user: User | object;
+  token: string | null;
+  loading: boolean;
+  error: string | null | object;
+}
 
-const logout = createAsyncThunk("auth/log", async () => {});
+const initialState: AuthState = {
+  user: JSON.parse(sessionStorage.getItem("user") || "null"),
+  token: sessionStorage.getItem("token"),
+  loading: false,
+  error: null,
+};
+
+const login = createAsyncThunk(
+  "auth/log",
+  async (
+    { email, password }: { email: string; password: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const api = "";
+      const response : APIResponse = await fetch(api, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response?.success) {
+        const { token, user } = response.data;
+        sessionStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("token", token);
+        return { token, user };
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+const logout = createAsyncThunk("auth/log", async () => {
+  sessionStorage.removeItem("user");
+  sessionStorage.removeItem("user");
+});
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    user: {},
-    token: "",
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builders) => {
     builders
@@ -21,13 +57,13 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = action?.payload?.user;
+        state.token = action?.payload?.token;
         state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action?.payload ?? 'Error occured';
       })
       .addCase(logout.fulfilled, (state) => {
         state.loading = false;
