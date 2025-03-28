@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 type InputProps = {
   id: string;
   name: string;
@@ -6,6 +8,7 @@ type InputProps = {
   value: string;
   setValue: (value: string | ((prevVar: string) => string)) => void;
   className?: string;
+  icon?: ReactElement;
 };
 
 const FloatingLabelInput = ({
@@ -16,6 +19,7 @@ const FloatingLabelInput = ({
   type = "text",
   setValue,
   className,
+  icon,
   ...props
 }: InputProps) => {
   return (
@@ -31,6 +35,7 @@ const FloatingLabelInput = ({
         } ${className}`}
         {...props}
       />
+      {icon}
       <label
         className={`pointer-events-none duration-300 absolute
           ${
