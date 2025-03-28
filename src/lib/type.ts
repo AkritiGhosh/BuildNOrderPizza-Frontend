@@ -1,15 +1,20 @@
-export type UserContextType = {
-  user: string;
-  theme: boolean;
-  setTheme: React.Dispatch<React.SetStateAction<boolean>>;
+export type User = {
+  _id: string;
+  profile: string;
 };
 
 export type UserProfile = {
   user: string;
-  name: string
-  email: string
-  gender : "Male" | "Female"
-}
+  name: string;
+  email: string;
+  gender: "Male" | "Female";
+};
+
+export type APIResponse = {
+  success: boolean;
+  message: string;
+  data?: object | string;
+};
 
 export type PizzaOption = {
   isAvailable: boolean;
@@ -32,9 +37,9 @@ export type PizzaOptionByCategory = {
 };
 
 type PizzaCartTopping = {
-  id: string,
-  quantity: number
-}
+  id: string;
+  quantity: number;
+};
 
 export type PizzaCart = {
   id: number;
@@ -44,7 +49,6 @@ export type PizzaCart = {
   sauce: string;
   toppings: Array<PizzaCartTopping>;
   cheese: string[];
-}
+};
 
 export type FormStepsType = "size" | "crust" | "toppings" | "cheese" | "sauce";
-
