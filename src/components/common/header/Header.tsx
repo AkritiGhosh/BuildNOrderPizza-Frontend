@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Dropdown from "../button/Dropdown";
 import ThemeButton from "./ToggleThemeButton";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { logout } from "../../../redux/slice/authSlice";
 
 type NavLinksTypes = {
@@ -140,11 +140,14 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const loc = useLocation();
   const path: string = "/" + loc.pathname?.split("/")[1];
-  const isLoggedIn: boolean = sessionStorage.getItem("token") ? true : false;
+  const { loggedIn } = useAppSelector((state) => state.auth);
   const name: string = sessionStorage.getItem("name") ?? "";
 
-  const handleLogout = () => dispatch(logout());
-  
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.reload();
+  };
+
   return (
     <header className="w-full relative top-0 h-auto md:h-14 lg:h-20 bg-amber-50/80 dark:bg-slate-950/80 text-black dark:text-white z-50 shadow shadow-amber-500 dark:shadow-slate-200">
       <div className="container relative h-auto md:h-full mx-auto px-4 md:px-[2.5%] lg:px-[5%] flex flex-col md:flex-row items-end justify-between gap-x-5">
@@ -190,7 +193,7 @@ const Header = () => {
             <li className="w-full py-2.5 px-4 text-sm text-amber-500 cursor-pointer hover:bg-amber-200/30 dark:hover:bg-slate-400/30 group">
               <ThemeButton />
             </li>
-            {!isLoggedIn ? (
+            {!loggedIn ? (
               <Link to="/auth">
                 <li className="w-full py-2.5 px-4 text-sm text-amber-500 hover:bg-amber-200/20 hover:font-semibold hover:tracking-wide cursor-pointer">
                   Login

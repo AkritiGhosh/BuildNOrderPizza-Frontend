@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { APIResponse, User } from "../../lib/type";
 
 export interface AuthState {
+  loggedIn: boolean;
   user: User | object;
   token: string | null;
   loading: boolean;
@@ -9,6 +10,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
+  loggedIn: !!sessionStorage.getItem("token"),
   user: JSON.parse(sessionStorage.getItem("user") || "null"),
   token: sessionStorage.getItem("token"),
   loading: false,
@@ -64,6 +66,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action?.payload?.user;
         state.token = action?.payload?.token;
+        state.loggedIn = true;
         state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
@@ -75,8 +78,9 @@ const authSlice = createSlice({
         state.user = {};
         state.token = "";
         state.error = null;
+        state.loggedIn = false;
       });
   },
 });
 
-export default authSlice;
+export default authSlice.reducer;
